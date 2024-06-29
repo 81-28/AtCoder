@@ -1,7 +1,8 @@
 // 
 
-// Ctrl + Shift + B       => Build
-// Terminal << "./a.out"  => Run
+// Ctrl + Shift + B                => Build
+// Terminal : "./a.out"            => Run
+// Terminal : "./a.out < ./in.txt" => Run
 
 #include <bits/stdc++.h>
 using namespace std;
