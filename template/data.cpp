@@ -67,6 +67,18 @@ int main() {
     std::cout << "one: " << myMap["one"] << std::endl; // one: 1
     std::cout << "two: " << myMap["two"] << std::endl; // two: 2
 
+
+    // mapの初期化
+    std::map<std::string, int> m;
+    m["apple"] = 1;
+    m["banana"] = 2;
+    m["cherry"] = 3;
+
+    // mapの要素を全て出力する方法
+    for (const auto &pair : m) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
     return 0;
 }
 
