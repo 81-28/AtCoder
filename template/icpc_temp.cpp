@@ -16,27 +16,32 @@ using namespace std;
 #define YesNo(bool) if(bool){cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
 #define substring(s,l,r) s.substr(l,r-l)
 using ll = long long;
+using ull = unsigned long long;
+using ld = long double;
 using P = pair<int,int>;
 using Graph = vector<vector<int>>;
 // using mint = modint1000000007;
 // using mint = modint998244353;
 
-vector<int> input(int n) {
-    vector<int> As;
-    As.reserve(n);
-    rep(i,n) {
-        int A;
-        cin >> A;
-        As.push_back(A);
+template<typename T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+    for(int i = 0; i < (int) v.size(); i++) {
+    os << v[i] << (i + 1 != (int) v.size() ? " " : "");
     }
-    return As;
+    return os;
 }
-void print(vector<int> anss) {
-    rep(i,anss.size()) cout << anss[i] << " ";
-    cout << endl;
+template<typename T>
+istream &operator>>(istream &is, vector<T> &v) {
+    for(T &in : v) is >> in;
+    return is;
 }
-void printn(vector<int> anss) {
-    rep(i,anss.size()) cout << anss[i] << endl;
+void print() { cout << '\n'; }
+template<typename T>
+void print(const T &t) { cout << t << '\n'; }
+template<typename Head, typename... Tail>
+void print(const Head &head, const Tail &... tail) {
+    cout << head << ' ';
+    print(tail...);
 }
 
 
@@ -53,22 +58,19 @@ int main() {
             break;
         } else {
             int ans = 0;
-            vector<int> as;
-            rep(i,n) {
-                int a;
-                cin >> a;
-                as.push_back(a);
-            }
+            vector<int> a(n);
+            cin >> a;
 
 
 
             anss.push_back(ans);
             anss[index] += ans;
+
             index++;
         }
     }
 
-    printn(anss);
+    print(anss);
 
     return 0;
 }
