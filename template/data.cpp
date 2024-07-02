@@ -25,6 +25,7 @@ int main() {
 
     // 要素の追加
     vec.push_back(6);
+    vec.insert(vec.begin() + 2, 10); // 3番目の位置に10を挿入
 
     // 要素へのアクセス
     for (int i = 0; i < vec.size(); i++) {
@@ -465,27 +466,28 @@ int main() {
 
 
 // アルゴリズム
-// #include <iostream>
-// #include <algorithm>
-// #include <vector>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <numeric> // std::accumulateを使うために必要
 
-// int main() {
-//     std::vector<int> vec = {1, 2, 3, 4, 5};
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
 
-//     // 逆順
-//     std::reverse(vec.begin(), vec.end());
-//     for (int i : vec) {
-//         std::cout << i << " "; // 5 4 3 2 1
-//     }
-//     std::cout << std::endl;
+    // 逆順
+    std::reverse(vec.begin(), vec.end());
+    for (int i : vec) {
+        std::cout << i << " "; // 5 4 3 2 1
+    }
+    std::cout << std::endl;
 
-//     // 合計
-//     int sum = std::accumulate(vec.begin(), vec.end(), 0);
-//     std::cout << "Sum: " << sum << std::endl; // Sum: 15
+    // 合計
+    int sum = std::accumulate(vec.begin(), vec.end(), 0);
+    std::cout << "Sum: " << sum << std::endl; // Sum: 15
 
-//     // 最大値
-//     int maxElement = *std::max_element(vec.begin(), vec.end());
-//     std::cout << "Max element: " << maxElement << std::endl; // Max element: 5
+    // 最大値
+    int maxElement = *std::max_element(vec.begin(), vec.end());
+    std::cout << "Max element: " << maxElement << std::endl; // Max element: 5
 
-//     return 0;
-// }
+    return 0;
+}
