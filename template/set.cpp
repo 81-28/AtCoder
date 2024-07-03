@@ -46,10 +46,11 @@ int main() {
     for (const auto &element : mySet) cout << element << " "; // 全要素の出力
     cout << endl;
     
-    for (auto it = mySet.begin(); it != mySet.end(); ++it) {
-        cout << *it << " ";
-    }
-    cout << endl;
+    // iteratorのincludeが必要
+    // for (auto it = mySet.begin(); it != mySet.end(); ++it) {
+    //     cout << *it << " ";
+    // }
+    // cout << endl;
 
 
     set<int> anotherSet = {1, 2, 3};

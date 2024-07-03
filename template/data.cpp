@@ -25,7 +25,6 @@ int main() {
 
     // 要素の追加
     vec.push_back(6);
-    vec.insert(vec.begin() + 2, 10); // 3番目の位置に10を挿入
 
     // 要素へのアクセス
     for (int i = 0; i < vec.size(); i++) {
@@ -33,6 +32,9 @@ int main() {
     }
     std::cout << std::endl; // 1 2 3 4 5 6
 
+
+    // 3番目の位置に10を挿入
+    vec.insert(vec.begin() + 2, 10);
 
     // 3番目の要素を削除 (インデックスは2)
     vec.erase(vec.begin() + 2);
