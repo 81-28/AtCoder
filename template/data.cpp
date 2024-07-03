@@ -33,6 +33,22 @@ int main() {
     std::cout << std::endl; // 1 2 3 4 5 6
 
 
+    // 3行5列の二次元ベクトルを全て0で初期化
+    int rows = 3;
+    int cols = 5;
+    std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols, 0));
+
+    // 動的にサイズを決める
+    int rows = 3;
+    int cols = 5;
+    // 行を確保
+    std::vector<std::vector<int>> matrix;
+    matrix.resize(rows);
+    // 各行の列を確保し、初期化
+    for (int i = 0; i < rows; ++i) {
+        matrix[i].resize(cols, 0);  // 全て0で初期化
+    }
+
     // 3番目の位置に10を挿入
     vec.insert(vec.begin() + 2, 10);
 
