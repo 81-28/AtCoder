@@ -86,6 +86,7 @@ int main() {
 
     int start = 2;
     int end = 5;
+    // インデックス2から4まで
     std::vector<int> slicedVec(vec.begin() + start, vec.begin() + end);
 
     std::cout << "Sliced vector: ";
