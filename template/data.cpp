@@ -49,6 +49,14 @@ int main() {
         matrix[i].resize(cols, 0);  // 全て0で初期化
     }
 
+    // 末尾の要素を削除
+    vec.pop_back();
+
+    // ベクトルが空かどうかを確認
+    if (vec.empty()) {
+        std::cout << "Vector is empty" << std::endl;
+    }
+
     // 3番目の位置に10を挿入
     vec.insert(vec.begin() + 2, 10);
 
@@ -90,29 +98,56 @@ int main() {
 }
 
 
-// 最大値を求める方法
+// 標準ライブラリのソート
 #include <iostream>
 #include <vector>
-#include <algorithm> // std::max_element
+#include <algorithm>
 
 int main() {
-    std::vector<int> vec = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    std::vector<int> vec = {5, 3, 1, 4, 2};
 
-    int max = *std::max_element(vec.begin(), vec.end());
+    // ソート
+    std::sort(vec.begin(), vec.end());
 
-    std::cout << "Maximum value in the vector: " << max << std::endl;
+    // ソート後の出力
+    for (int i = 0; i < vec.size(); i++) {
+        std::cout << vec[i] << " ";
+    }
+    std::cout << std::endl; // 1 2 3 4 5
 
     return 0;
 }
 
 
-// 最大値のインデックスを求める方法
+// アルゴリズム
 #include <iostream>
-#include <vector>
 #include <algorithm> // std::max_element
+#include <vector>
+#include <numeric> // std::accumulate
 
 int main() {
-    std::vector<int> vec = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+
+    // 検索
+    auto it = std::find(vec.begin(), vec.end(), 3);
+    if (it != vec.end()) {
+        std::cout << "Found 3 at position " << std::distance(vec.begin(), it) << std::endl;
+    }
+
+    // 逆順
+    std::reverse(vec.begin(), vec.end());
+    for (int i : vec) {
+        std::cout << i << " "; // 5 4 3 2 1
+    }
+    std::cout << std::endl;
+
+    // 合計
+    int sum = std::accumulate(vec.begin(), vec.end(), 0);
+    std::cout << "Sum: " << sum << std::endl; // Sum: 15
+
+    // 最大値
+    int maxElement = *std::max_element(vec.begin(), vec.end());
+    std::cout << "Max element: " << maxElement << std::endl; // Max element: 5
 
     // 最大値のイテレータを取得
     auto maxElementIter = std::max_element(vec.begin(), vec.end());
@@ -251,28 +286,6 @@ int main() {
         vec.push_back(i);
         std::cout << "Capacity: " << vec.capacity() << ", Size: " << vec.size() << std::endl;
     }
-
-    return 0;
-}
-
-
-
-// 標準ライブラリのソート
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-int main() {
-    std::vector<int> vec = {5, 3, 1, 4, 2};
-
-    // ソート
-    std::sort(vec.begin(), vec.end());
-
-    // ソート後の出力
-    for (int i = 0; i < vec.size(); i++) {
-        std::cout << vec[i] << " ";
-    }
-    std::cout << std::endl; // 1 2 3 4 5
 
     return 0;
 }
@@ -477,35 +490,6 @@ int main() {
         pq.pop();
     }
     std::cout << std::endl; // 5 3 1
-
-    return 0;
-}
-
-
-
-// アルゴリズム
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <numeric> // std::accumulateを使うために必要
-
-int main() {
-    std::vector<int> vec = {1, 2, 3, 4, 5};
-
-    // 逆順
-    std::reverse(vec.begin(), vec.end());
-    for (int i : vec) {
-        std::cout << i << " "; // 5 4 3 2 1
-    }
-    std::cout << std::endl;
-
-    // 合計
-    int sum = std::accumulate(vec.begin(), vec.end(), 0);
-    std::cout << "Sum: " << sum << std::endl; // Sum: 15
-
-    // 最大値
-    int maxElement = *std::max_element(vec.begin(), vec.end());
-    std::cout << "Max element: " << maxElement << std::endl; // Max element: 5
 
     return 0;
 }
