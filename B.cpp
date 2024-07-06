@@ -41,10 +41,10 @@ int main() {
         if(n==0){
             break;
         }
-        vector<int> a(n),b(n);
+        vector<ll> a(n),b(n);
         cin >> a >> b;
-        int d = 0;
-        int pd = 0;
+        ll d = 0;
+        ll pd = 0;
         rep(i,n) {
             if (a[i] != b[i])
             {
