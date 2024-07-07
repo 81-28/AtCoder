@@ -49,23 +49,40 @@ void print(const Head &head, const Tail &... tail) {
 int main() {
     ll n;
     cin >> n;
-    set<ll> ans;
+    unordered_set<ll> ans;
     ans.insert(1);
-    ll maxB = log2(n);
-    for (int b = 2; b <= maxB; b++)
+    // int maxB = log2(n);
+    // for (int b = 2; b <= maxB; b++)
+    // {
+    //     ll a = 2;
+    //     ll p = pow(2,b);
+    //     while (p <= n) {
+    //         ans.insert(p);
+    //         a++;
+    //         p = pow(a,b);
+    //         while(ans.find(a) != ans.end()) {
+    //             a++;
+    //             p = pow(a,b);
+    //         }
+    //     }
+    // }
+    ll maxA = sqrt(n);
+    ll a = 2;
+    while (a < maxA)
     {
-        ll p = pow(2,b);
-        ll a = 2;
+        int b = 2;
+        ll p = pow(a,2);
         while (p <= n) {
             ans.insert(p);
-            a++;
-            while(pow((ll)pow(a,1/2),2) == a) {
-                a++;
-            }
+            b++;
             p = pow(a,b);
         }
+        a++;
+        while(ans.find(a) != ans.end()) {
+            a++;
+        }
     }
-    
+
     print(ans.size());
 
 

@@ -52,7 +52,7 @@ int main() {
 
     int n;
     cin >> n;
-    vector<int> a(n);
+    vector<int> a(n),b(n,0);
     cin >> a;
 
 
@@ -61,7 +61,9 @@ int main() {
 
 
 
-    cout << ans << endl;
+    print(ans);
+    cout << ans << " ";
+    cout << endl;
     print(anss);
     cout << anss << endl;
 
