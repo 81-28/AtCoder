@@ -144,6 +144,7 @@ int main() {
 
     // 合計
     int sum = std::accumulate(vec.begin(), vec.end(), 0);
+    long long sumLL = std::accumulate(vec.begin(), vec.end(), 0LL);
     std::cout << "Sum: " << sum << std::endl; // Sum: 15
 
     // 最大値
