@@ -33,6 +33,30 @@ int main() {
 
 
 
+// 文字列を逆さまにする関数
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+std::string reverseString(std::string str) {
+    // std::reverseを使って文字列を逆さまにする
+    std::reverse(str.begin(), str.end());
+    return str;
+}
+
+int main() {
+    std::string s;
+    std::cout << "文字列を入力してください: ";
+    std::cin >> s;
+
+    std::string reversed = reverseString(s);
+    std::cout << "逆さまにした文字列: " << reversed << std::endl;
+
+    return 0;
+}
+
+
+
 // アルファベットの大文字と小文字を入れ替える方法
 #include <iostream>
 #include <cctype>
@@ -106,6 +130,75 @@ int main() {
     // 出力例
     std::cout << "Length: " << length << std::endl; // Length: 13
     
+    return 0;
+}
+
+
+
+// 全ての並べ替えを生成する関数
+#include <iostream>
+#include <string>
+#include <set>
+#include <algorithm>
+
+std::set<std::string> stringPermutations(std::string str) {
+    std::set<std::string> permutations;
+    std::sort(str.begin(), str.end());
+
+    while (std::next_permutation(str.begin(), str.end())) {
+        permutations.insert(str);
+    }
+
+    return permutations;
+}
+
+int main() {
+    std::string s = "abc";
+    std::set<std::string> permutations = stringPermutations(s);
+
+    for (const auto& perm : permutations) {
+        std::cout << perm << std::endl;
+    }
+
+    return 0;
+}
+
+
+
+// 文字列が回文かどうか判定する関数
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+bool isPalindrome(std::string str) {
+    // 文字列の開始位置と終了位置を取得
+    int left = 0;
+    int right = str.length() - 1;
+
+    // 左右から中央に向かって文字を比較
+    while (left < right) {
+        // 文字が一致しない場合は回文ではない
+        if (str[left] != str[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    // すべての文字が一致した場合は回文
+    return true;
+}
+
+int main() {
+    std::string s;
+    std::cout << "文字列を入力してください: ";
+    std::cin >> s;
+
+    if (isPalindrome(s)) {
+        std::cout << s << " は回文です。" << std::endl;
+    } else {
+        std::cout << s << " は回文ではありません。" << std::endl;
+    }
+
     return 0;
 }
 

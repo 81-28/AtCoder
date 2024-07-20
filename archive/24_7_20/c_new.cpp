@@ -1,4 +1,4 @@
-// 
+// https://atcoder.jp/contests/abc363/tasks/abc363_c
 
 // Ctrl + Shift + B                => Build
 // Terminal : "./a.out"            => Run
@@ -45,27 +45,48 @@ void print(const Head &head, const Tail &... tail) {
 }
 
 
+set<string> stringPermutations(const string& s) {
+    set<string> permutations;
+    string temp = s;
+    sort(temp.begin(), temp.end());
+    
+    do {
+        permutations.insert(temp);
+    } while (next_permutation(temp.begin(), temp.end()));
+    
+    return permutations;
+}
+bool isPalindrome(const string& str) {
+    int left = 0;
+    int right = str.length() - 1;
+
+    while (left < right) {
+        if (str[left] != str[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
 
 int main() {
-    ofstream output("out.txt");
-    while (true)
-    {
-        int n;
-        cin >> n;
-        if (n == 0)
-        {
-            break;
-        } else {
-            int ans = 0;
-            vector<int> a(n);
-            cin >> a;
-
-
-            output<<ans<<endl;
+    int n,k;
+    string s;
+    cin >> n >> k >> s;
+    set<string> ss = stringPermutations(s);
+    int minus = 0;
+    for (const auto nows : ss) {
+        rep(i,n+1-k) {
+            string sub = nows.substr(i,k);
+            if (isPalindrome(sub))
+            {
+                minus++;
+                break;
+            }
         }
     }
-    output.close();
-    cout<<"complete"<<endl;
+    print(ss.size()-minus);
 
     return 0;
 }

@@ -1,4 +1,4 @@
-// 
+// https://atcoder.jp/contests/abc363/tasks/abc363_b
 
 // Ctrl + Shift + B                => Build
 // Terminal : "./a.out"            => Run
@@ -47,25 +47,18 @@ void print(const Head &head, const Tail &... tail) {
 
 
 int main() {
-    ofstream output("out.txt");
-    while (true)
+    int n,t,p;
+    cin >> n >> t >> p;
+    vector<int> l(n);
+    cin >> l;
+    sort(all(l));
+    int base = l[l.size()-p];
+    if (base >= t)
     {
-        int n;
-        cin >> n;
-        if (n == 0)
-        {
-            break;
-        } else {
-            int ans = 0;
-            vector<int> a(n);
-            cin >> a;
-
-
-            output<<ans<<endl;
-        }
+        print(0);
+    } else {
+        print(t-base);
     }
-    output.close();
-    cout<<"complete"<<endl;
 
     return 0;
 }

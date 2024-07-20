@@ -1,4 +1,4 @@
-// 
+// https://atcoder.jp/contests/abc363/tasks/abc363_c
 
 // Ctrl + Shift + B                => Build
 // Terminal : "./a.out"            => Run
@@ -44,28 +44,58 @@ void print(const Head &head, const Tail &... tail) {
     print(tail...);
 }
 
+int factorial(int k) {
+    int result = 1;
+    rep1(i,k) {
+        result *= i;
+    }
+    return result;
+}
 
 
 int main() {
-    ofstream output("out.txt");
-    while (true)
-    {
-        int n;
-        cin >> n;
-        if (n == 0)
+    int ans = 0;
+    int n,k;
+    string s;
+    cin >> n >> k >> s;
+    int k2 = k/2;
+    map<char,int> num;
+    rep(i,n) {
+        num[s[i]]++;
+    }
+    map<char,int> num2 = num;
+    for (const auto &pair : num2) {
+        num2[pair.first] /= 2;
+    }
+    int sum2 = 0;
+    set<char> del;
+    for (const auto &pair : num2) {
+        if (pair.second == 0)
         {
-            break;
+            del.insert(pair.first);
         } else {
-            int ans = 0;
-            vector<int> a(n);
-            cin >> a;
-
-
-            output<<ans<<endl;
+            sum2 += pair.second;
         }
     }
-    output.close();
-    cout<<"complete"<<endl;
+    for (const auto element : del) {
+        num2.erase(element);
+    }
+
+    ans = factorial(n);   
+    for (const auto &pair : num) {
+        ans /= pair.second;
+    }
+    if (sum2 < k2) {
+        print(ans);
+    } else {
+        int includes = factorial(sum2);
+        for (const auto &pair : num2) {
+            includes /= pair.second;
+        }
+        print(ans - (n+1-k)*includes);
+    }
+    // kが奇数の時、中央の文字列を考慮できなくてこの方法諦めた
+    
 
     return 0;
 }

@@ -1,4 +1,4 @@
-// 
+// https://atcoder.jp/contests/abc363/tasks/abc363_d
 
 // Ctrl + Shift + B                => Build
 // Terminal : "./a.out"            => Run
@@ -45,27 +45,48 @@ void print(const Head &head, const Tail &... tail) {
 }
 
 
+string reverseString(const string& str) {
+    string reversedStr = str;
+    reverse(reversedStr.begin(), reversedStr.end());
+    return reversedStr;
+}
 
 int main() {
-    ofstream output("out.txt");
-    while (true)
+    ll n;
+    cin >> n;
+    set<ll> ans,ans1;
+
+    rep(i,10) ans1.insert(i);
+
+    set<ll> pNum;
+    for (int i = 2; i <= 30; i++)
     {
-        int n;
-        cin >> n;
-        if (n == 0)
-        {
+        if(ans.size() >= n) {
             break;
+        }
+        if (i&2)
+        {
+            for (int k = 0; k < 10; k++)
+            {
+                ll de = pow(10,i/2);
+                for (int j = 0; j < de; j++)
+                {
+                    ans.insert(j*de*10+k*de+stoll(reverseString(to_string(j))));
+                }
+            }
+            
         } else {
-            int ans = 0;
-            vector<int> a(n);
-            cin >> a;
-
-
-            output<<ans<<endl;
+            ll de = pow(10,i/2);
+            for (int j = 0; j < de; j++)
+            {
+                ans.insert(j*de+stoll(reverseString(to_string(j))));
+            }
         }
     }
-    output.close();
-    cout<<"complete"<<endl;
+
+    auto it = ans.begin();
+    advance(it, n - 1);
+    print(*it);
 
     return 0;
 }
