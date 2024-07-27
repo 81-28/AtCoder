@@ -136,6 +136,7 @@ int main() {
 
 
 // 全ての並べ替えを生成する関数
+// vectorでも重複無いっぽい
 #include <iostream>
 #include <string>
 #include <set>
@@ -170,7 +171,7 @@ int main() {
 #include <string>
 #include <algorithm>
 
-bool isPalindrome(std::string str) {
+bool isPalindrome(const std::string& str) {
     // 文字列の開始位置と終了位置を取得
     int left = 0;
     int right = str.length() - 1;
@@ -187,6 +188,11 @@ bool isPalindrome(std::string str) {
     // すべての文字が一致した場合は回文
     return true;
 }
+// これでもできるが、メモリを無駄に使ってしまう。
+// bool isPalindrome(const string& str) {
+//     string reversedStr = reverseString(str);
+//     return str == reversedStr;
+// }
 
 int main() {
     std::string s;

@@ -24,16 +24,16 @@ using Graph = vector<vector<int>>;
 // using mint = modint998244353;
 
 template<typename T>
+istream &operator>>(istream &is, vector<T> &v) {
+    for(T &in : v) is >> in;
+    return is;
+}
+template<typename T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
     for(int i = 0; i < (int) v.size(); i++) {
     os << v[i] << (i + 1 != (int) v.size() ? " " : "");
     }
     return os;
-}
-template<typename T>
-istream &operator>>(istream &is, vector<T> &v) {
-    for(T &in : v) is >> in;
-    return is;
 }
 void print() { cout << '\n'; }
 template<typename T>
