@@ -1,4 +1,4 @@
-// 
+// https://atcoder.jp/contests/abc364/tasks/abc364_b
 
 // Ctrl + Shift + B                => Build
 // Terminal : "./a.out"            => Run
@@ -44,11 +44,6 @@ void print(const Head &head, const Tail &... tail) {
     print(tail...);
 }
 
-
-// ################################################################
-
-
-// 合計する関数
 int sum(const vector<int>& v) { return accumulate(all(v),0); }
 ll sumLL(const vector<int>& v) { return accumulate(all(v),0LL); }
 int sum(const set<int>& set) {
@@ -61,72 +56,45 @@ ll sumLL(const set<int>& set) {
 }
 
 
-// 階乗する関数
-int factorial(const int& k) {
-    int result = 1;
-    rep1(i,k) result *= i;
-    return result;
-}
-ll factorialLL(const int& n) {
-    ll result = 1;
-    rep1(i,n) result *= i;
-    return result;
-}
-
-
-// 文字列を逆さまにする関数
-string reverseString(const string& s) {
-    string str = s;
-    reverse(all(str));
-    return str;
-}
-
-
-// 文字列が回文かどうか判定する関数
-bool isPalindrome(const string& s) {
-    int left = 0;
-    int right = s.length() - 1;
-    while (left < right) {
-        if (s[left] != s[right]) return false;
-        left++;
-        right--;
-    }
-    return true;
-}
-
-
-// 全ての並べ替えの配列を生成する関数　重複なし
-vector<string> generatePermutations(const string& s) {
-    string str = s;
-    sort(all(str));
-    vector<string> permutations;
-    do {
-        permutations.push_back(str);
-    } while (next_permutation(all(str)));
-    return permutations;
-}
-template<typename T>
-vector<vector<T>> generatePermutations(const vector<T>& v) {
-    vector<T> vec = v;
-    sort(all(vec));
-    vector<vector<T>> permutations;
-    do {
-        permutations.push_back(vec);
-    } while (next_permutation(all(vec)));
-    return permutations;
-}
-
-
-// ################################################################
-
-
 int main() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    cin >> a;
-    vector<vector<int>> perms(generatePermutations(a));
-    for (auto perm : perms) print(perm);
+    int h,w,si,sj;
+    cin >> h >> w >> si >> sj;
+    vector<string> c(h);
+    cin >> c;
+    string x;
+    cin >> x;
+    P s = {si-1,sj-1};
+
+    rep(i,x.size()) {
+        P next = s;
+        if (x[i] == 'L')
+        {
+            next.second--;
+        }
+        if (x[i] == 'R')
+        {
+            next.second++;
+        }
+        if (x[i] == 'U')
+        {
+            next.first--;
+        }
+        if (x[i] == 'D')
+        {
+            next.first++;
+        }
+        if (next.first < 0 || next.first >= h || next.second < 0 || next.second >= w) {
+            
+        } else {
+            if (c[next.first][next.second] == '#')
+            {
+                
+            } else {
+                s = next;
+            }
+        }
+    }
+    cout << s.first+1 << ' ' << s.second+1 << endl;
 
     return 0;
 }

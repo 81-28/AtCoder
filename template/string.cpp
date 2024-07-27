@@ -146,9 +146,9 @@ std::set<std::string> stringPermutations(std::string str) {
     std::set<std::string> permutations;
     std::sort(str.begin(), str.end());
 
-    while (std::next_permutation(str.begin(), str.end())) {
+    do {
         permutations.insert(str);
-    }
+    } while (std::next_permutation(str.begin(), str.end()));
 
     return permutations;
 }

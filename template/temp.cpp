@@ -44,6 +44,16 @@ void print(const Head &head, const Tail &... tail) {
     print(tail...);
 }
 
+int sum(const vector<int>& v) { return accumulate(all(v),0); }
+ll sumLL(const vector<int>& v) { return accumulate(all(v),0LL); }
+int sum(const set<int>& set) {
+    vector<int> vec(all(set));
+    return accumulate(all(vec),0);
+}
+ll sumLL(const set<int>& set) {
+    vector<int> vec(all(set));
+    return accumulate(all(vec),0LL);
+}
 
 
 int main() {
