@@ -75,10 +75,9 @@ ll factorialLL(const int& n) {
 
 
 // 二分探索をして、値のindexを返す関数
-int binSearch(vector<int> a, int x) {
+int binSearch(const vector<int>& a, const int& x) {
     int l = 0,r = a.size()-1;
-    while (l <= r)
-    {
+    while (l <= r) {
         int m = (l+r)/2;
         if (x < a[m]) r = m-1;
         if (x == a[m]) return m;
