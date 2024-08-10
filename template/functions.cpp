@@ -128,6 +128,33 @@ vector<vector<T>> generatePermutations(const vector<T>& v) {
     } while (next_permutation(all(vec)));
     return permutations;
 }
+// 全ての順列を生成する関数?
+// template<typename T>
+// vector<vector<T>> generatePermutations(const vector<T>& v, int r) {
+//     vector<vector<T>> permutations;
+//     vector<bool> select(v.size(), false);
+
+//     // 最初の r 個を true に設定する
+//     fill(select.begin(), select.begin() + r, true);
+
+//     do {
+//         vector<T> combination;
+//         for (int i = 0; i < v.size(); ++i) {
+//             if (select[i]) {
+//                 combination.push_back(v[i]);
+//             }
+//         }
+
+//         // r個選んだ要素に対して全ての順列を生成する
+//         sort(combination.begin(), combination.end());
+//         do {
+//             permutations.push_back(combination);
+//         } while (next_permutation(combination.begin(), combination.end()));
+
+//     } while (prev_permutation(select.begin(), select.end()));
+
+//     return permutations;
+// }
 
 
 // ################################################################
