@@ -57,6 +57,11 @@ int main() {
         std::cout << "Vector is empty" << std::endl;
     }
 
+    // 3以上の最小の要素
+    auto it = lower_bound(vec.begin(), vec.end(), 3);
+    // 距離(index)を求める
+    std::cout << distance(vec.begin(),it) << std::endl;
+
     // 3番目の位置に10を挿入
     vec.insert(vec.begin() + 2, 10);
 
@@ -68,6 +73,9 @@ int main() {
 
     // 2番目から4番目の要素を削除 (インデックスは1から3)
     vec.erase(vec.begin() + 1, vec.begin() + 4);
+
+	// 配列の重複を消す
+	vec.erase(unique(vec.begin(), vec.end()), vec.end());
 
     // 全ての要素を削除
     vec.clear();
