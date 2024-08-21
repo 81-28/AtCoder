@@ -74,6 +74,26 @@ ll factorialLL(const int& n) {
 }
 
 
+// 素数判定する関数
+bool isPrime(const int& n) {
+    if (n <= 1) {
+        return false;
+    } else if (n <= 3) {
+        return true;
+    } else if (n % 2 == 0 || n % 3 == 0) {
+        return false;
+    }
+    int i = 5;
+    while (i * i <= n) {
+        if (n % i == 0 || n % (i + 2) == 0) {
+            return false;
+        }
+        i += 6;
+    }
+    return true;
+}
+
+
 // 二分探索をして、値のindexを返す関数
 int binSearch(const vector<int>& a, const int& x) {
     int l = 0,r = a.size()-1;
