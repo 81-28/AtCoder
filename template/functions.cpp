@@ -74,6 +74,20 @@ ll factorialLL(const int& n) {
 }
 
 
+// ユークリッドの互除法を用いて最大公約数を求める関数
+ll gcd(ll a, ll b) {
+    while (b != 0) {
+        ll temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+// 最小公倍数を求める関数
+ll lcm(const ll& a, const ll& b) {
+    return abs(a * b) / gcd(a, b);
+}
+
 // 素数判定する関数
 bool isPrime(const int& n) {
     if (n <= 1) {
@@ -91,6 +105,24 @@ bool isPrime(const int& n) {
         i += 6;
     }
     return true;
+}
+// 素因数分解する関数
+vector<int> primeFactors(int n) {
+    vector<int> factors;
+    if (n < 2 || isPrime(n)) {
+        factors.push_back(n);
+    } else {
+        int divisor = 2;
+        while (n >= 2) {
+            if (n % divisor == 0) {
+                factors.push_back(divisor);
+                n /= divisor;
+            } else {
+                divisor++;
+            }
+        }
+    }
+    return factors;
 }
 
 
