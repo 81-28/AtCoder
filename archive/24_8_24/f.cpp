@@ -1,39 +1,14 @@
-// 
-
-// Ctrl + Shift + B                => Build
-// Terminal : "./a.out"            => Run
-// Terminal : "./a.out < ./in.txt" => Run
+// https://atcoder.jp/contests/abc368/tasks/abc368_f
 
 #include <bits/stdc++.h>
 using namespace std;
-// #include <atcoder/all>
-// using namespace atcoder;
 
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define rep1(i, n) for (int i = 1; i < (int)(n+1); i++)
-#define all(v) v.begin(), v.end()
-#define rall(v) v.rbegin(), v.rend()
-#define YesNo(bool) if(bool){cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
-#define substring(s,l,r) s.substr(l,r-l)
-using ll = long long;
-using ull = unsigned long long;
-using ld = long double;
-using P = pair<int,int>;
-using Graph = vector<vector<int>>;
-// using mint = modint1000000007;
-// using mint = modint998244353;
 
 template<typename T>
 istream &operator>>(istream &is, vector<T> &v) {
     for(T &in : v) is >> in;
     return is;
-}
-template<typename T>
-ostream &operator<<(ostream &os, const vector<T> &v) {
-    for(int i = 0; i < (int) v.size(); i++) {
-    os << v[i] << (i + 1 != (int) v.size() ? " " : "");
-    }
-    return os;
 }
 void print() { cout << '\n'; }
 template<typename T>
@@ -85,23 +60,13 @@ int main() {
     cin >> n;
     vector<int> a(n);
     cin >> a;
-    int s = n;
-    int countP = 0,countC = 0;
+    int s = 0;
     rep(i,n) {
         vector<int> f = primeFactors(a[i]);
-        s += f.size()%2;
-        if (f.size() == 1) countP++;
-        else countC++;
+        s ^= f.size();
     }
-    if (countC==1) {
-        print("Anna");
-    } else {
-        if (s%2 == 0) {
-            print("Bruno");
-        } else {
-            print("Anna");
-        }
-    }
+    if (s == 0) print("Bruno");
+    else print("Anna");
 
     return 0;
 }
