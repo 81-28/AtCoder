@@ -63,6 +63,17 @@ ll sumLL(const vector<T>& v) { return accumulate(v.begin(),v.end(),0LL); }
 // }
 
 
+// 最大,最小値を求める関数
+template<typename T>
+T max(const vector<T>& v) { return *max_element(v.begin(),v.end()); }
+template<typename T>
+T min(const vector<T>& v) { return *min_element(v.begin(),v.end()); }
+template<typename T, typename... Args>
+T max(const T& a, const T& b, const Args&... args) { return max(a,max(b,args...)); }
+template<typename T, typename... Args>
+T min(const T& a, const T& b, const Args&... args) { return min(a,min(b,args...)); }
+
+
 // 階乗する関数
 int factorial(const int& k) {
     int result = 1;

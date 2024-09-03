@@ -57,6 +57,15 @@ int sum(const vector<T>& v) { return accumulate(v.begin(),v.end(),0); }
 template<typename T>
 ll sumLL(const vector<T>& v) { return accumulate(v.begin(),v.end(),0LL); }
 
+template<typename T>
+T max(const vector<T>& v) { return *max_element(v.begin(),v.end()); }
+template<typename T>
+T min(const vector<T>& v) { return *min_element(v.begin(),v.end()); }
+template<typename T, typename... Args>
+T max(const T& a, const T& b, const Args&... args) { return max(a,max(b,args...)); }
+template<typename T, typename... Args>
+T min(const T& a, const T& b, const Args&... args) { return min(a,min(b,args...)); }
+
 
 int main() {
     ofstream output("out.txt");
