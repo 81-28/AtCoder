@@ -11,6 +11,7 @@ using namespace std;
 
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define rep1(i, n) for (int i = 1; i < (int)(n+1); i++)
+#define pb(a) push_back(a)
 #define all(v) v.begin(), v.end()
 #define rall(v) v.rbegin(), v.rend()
 #define YesNo(bool) if(bool){cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
@@ -18,22 +19,29 @@ using namespace std;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
-using P = pair<int,int>;
-using Graph = vector<vector<int>>;
+template<typename T>
+using v = vector<T>;
+using vi = v<int>;
+using vvi = v<vi>;
+using vll = v<ll>;
+using vvll = v<vll>;
+using pii = pair<int,int>;
+using pll = pair<ll,ll>;
 // using mint = modint1000000007;
 // using mint = modint998244353;
 
-template<typename T>
-ostream &operator<<(ostream &os, const vector<T> &v) {
-    for(int i = 0; i < (int) v.size(); i++) {
-    os << v[i] << (i + 1 != (int) v.size() ? " " : "");
-    }
-    return os;
-}
+#define fastio() ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
 template<typename T>
 istream &operator>>(istream &is, vector<T> &v) {
     for(T &in : v) is >> in;
     return is;
+}
+template<typename T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+    for(int i = 0; i < (int) v.size(); i++) {
+        os << v[i] << (i + 1 != (int) v.size() ? " " : "");
+    }
+    return os;
 }
 void print() { cout << '\n'; }
 template<typename T>
@@ -44,28 +52,29 @@ void print(const Head &head, const Tail &... tail) {
     print(tail...);
 }
 
+template<typename T>
+int sum(const vector<T>& v) { return accumulate(v.begin(),v.end(),0); }
+template<typename T>
+ll sumLL(const vector<T>& v) { return accumulate(v.begin(),v.end(),0LL); }
 
 
 int main() {
     ofstream output("out.txt");
-    while (true)
-    {
+    while (true) {
         int n;
         cin >> n;
-        if (n == 0)
-        {
+        if (n == 0) {
             break;
         } else {
             int ans = 0;
             vector<int> a(n);
             cin >> a;
 
-
-            output<<ans<<endl;
+            output << ans << endl;
         }
     }
     output.close();
-    cout<<"complete"<<endl;
+    cout << "complete" << endl;
 
     return 0;
 }

@@ -11,6 +11,7 @@ using namespace std;
 
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define rep1(i, n) for (int i = 1; i < (int)(n+1); i++)
+#define pb(a) push_back(a)
 #define all(v) v.begin(), v.end()
 #define rall(v) v.rbegin(), v.rend()
 #define YesNo(bool) if(bool){cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
@@ -18,11 +19,18 @@ using namespace std;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
-using P = pair<int,int>;
-using Graph = vector<vector<int>>;
+template<typename T>
+using v = vector<T>;
+using vi = v<int>;
+using vvi = v<vi>;
+using vll = v<ll>;
+using vvll = v<vll>;
+using pii = pair<int,int>;
+using pll = pair<ll,ll>;
 // using mint = modint1000000007;
 // using mint = modint998244353;
 
+#define fastio() ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
 template<typename T>
 istream &operator>>(istream &is, vector<T> &v) {
     for(T &in : v) is >> in;
@@ -31,7 +39,7 @@ istream &operator>>(istream &is, vector<T> &v) {
 template<typename T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
     for(int i = 0; i < (int) v.size(); i++) {
-    os << v[i] << (i + 1 != (int) v.size() ? " " : "");
+        os << v[i] << (i + 1 != (int) v.size() ? " " : "");
     }
     return os;
 }
@@ -44,38 +52,28 @@ void print(const Head &head, const Tail &... tail) {
     print(tail...);
 }
 
-int sum(const vector<int>& v) { return accumulate(all(v),0); }
-ll sumLL(const vector<int>& v) { return accumulate(all(v),0LL); }
-int sum(const set<int>& set) {
-    vector<int> vec(all(set));
-    return accumulate(all(vec),0);
-}
-ll sumLL(const set<int>& set) {
-    vector<int> vec(all(set));
-    return accumulate(all(vec),0LL);
-}
+template<typename T>
+int sum(const vector<T>& v) { return accumulate(v.begin(),v.end(),0); }
+template<typename T>
+ll sumLL(const vector<T>& v) { return accumulate(v.begin(),v.end(),0LL); }
 
 
 int main() {
-    int ans = 0;
-    vector<int> anss;
+    fastio();
 
     int n;
     cin >> n;
-    vector<int> a(n),b(n,0);
+    vi a(n);
     cin >> a;
 
 
-
-    anss = a;
-
-
+    int ans = 0;
+    vi anss(n,0);
+    vvi ansss(n,vi(n,0));
 
     print(ans);
-    cout << ans << " ";
-    cout << endl;
     print(anss);
-    cout << anss << endl;
+    rep(i,n) print(ansss[i]);
 
 
     return 0;
