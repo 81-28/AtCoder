@@ -68,14 +68,10 @@ template<typename T>
 T max(const vector<T>& v) { return *max_element(v.begin(),v.end()); }
 template<typename T>
 T min(const vector<T>& v) { return *min_element(v.begin(),v.end()); }
-template<typename T>
-T max(const T& a, const T& b, const T& c) { return max(a,max(b,c)); }
 template<typename T, typename... Args>
-T max(const T& a, const T& b, const T& c, const Args&... args) { return max(a,max(b,c,args...)); }
-template<typename T>
-T min(const T& a, const T& b, const T& c) { return min(a,min(b,c)); }
+T max(const T& a, const T& b, const T& c, const Args&... args) { return max({a,b,c,args...}); }
 template<typename T, typename... Args>
-T min(const T& a, const T& b, const T& c, const Args&... args) { return min(a,min(b,c,args...)); }
+T min(const T& a, const T& b, const T& c, const Args&... args) { return min({a,b,c,args...}); }
 
 
 // 階乗する関数
