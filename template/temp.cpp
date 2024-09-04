@@ -6,6 +6,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+// #define int long long
 // #include <atcoder/all>
 // using namespace atcoder;
 

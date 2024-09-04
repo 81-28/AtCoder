@@ -6,6 +6,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+// #define int long long
 // #include <atcoder/all>
 // using namespace atcoder;
 
@@ -136,6 +137,83 @@ vector<int> primeFactors(int n) {
         }
     }
     return factors;
+}
+
+
+// 素数 p に対する a^b の計算を行い、m で割った余りを返す関数
+ll ModPower(ll a, ll b, ll m) {
+    ll result = 1;
+    while (b > 0) {
+        if (b % 2 == 1) {
+            result = (result * a) % m;
+        }
+        a = (a * a) % m;
+        b /= 2;
+    }
+    return result;
+}
+
+// a ÷ b を m で割った余りを返す関数
+ll Division(ll a, ll b, ll m) {
+    return (a * ModPower(b, m - 2, m)) % m;
+}
+
+// nCr を計算する関数
+ll nCr(ll n, ll r) {
+    if (r > n) return 0;
+    if (r == 0 || r == n) return 1;
+    if (r > n - r) r = n - r;
+
+    ll result = 1;
+    for (int i = 1; i <= r; i++) {
+        result = result * (n - i + 1) / i;
+    }
+    return result;
+}
+// nCr を m で割った余りを計算する関数
+ll nCrModM(ll n, ll r, ll m) {
+    if (r > n) return 0;
+    if (r == 0 || r == n) return 1;
+    if (r > n - r) r = n - r;
+
+    ll numerator = 1, denominator = 1;
+    for (int i = 1; i <= n; i++) {
+        numerator = (numerator * i) % m;
+        if (i == r || i == n - r) denominator = (denominator * numerator) % m;
+    }
+    ll result = 1, power = m - 2;
+    while (power > 0) {
+        if (power % 2 == 1) result = (result * denominator) % m;
+        denominator = (denominator * denominator) % m;
+        power /= 2;
+    }
+    return (numerator * result) % m;
+}
+// nCr を m で割った余りを計算する関数（m = 0 の場合は割らない）
+ll nCrModM(ll n, ll r, ll m) {
+    if (r > n) return 0;
+    if (r == 0 || r == n) return 1;
+
+    ll numerator = 1, denominator = 1;
+    for (int i = 1; i <= n; i++) {
+        numerator *= i;
+        if (i == r || i == n - r) denominator *= numerator;
+        if (m != 0) {
+            numerator %= m;
+            denominator %= m;
+        }
+    }
+    if (m == 0) {
+        return numerator / denominator;
+    } else {
+        ll result = 1, power = m - 2;
+        while (power > 0) {
+            if (power % 2 == 1) result = (result * denominator) % m;
+            denominator = (denominator * denominator) % m;
+            power /= 2;
+        }
+        return (numerator * result) % m;
+    }
 }
 
 
