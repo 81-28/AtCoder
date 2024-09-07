@@ -15,6 +15,7 @@ using namespace std;
 #define all(v) v.begin(), v.end()
 #define rall(v) v.rbegin(), v.rend()
 #define YesNo(bool) if(bool){cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
+// substring : { s.begin()+l, s.begin()+r }
 #define substring(s,l,r) s.substr(l,r-l)
 using ll = long long;
 using ull = unsigned long long;
