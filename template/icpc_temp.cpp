@@ -31,7 +31,7 @@ using pll = pair<ll,ll>;
 // using mint = modint1000000007;
 // using mint = modint998244353;
 
-#define fastio() ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
+#define fastio() ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
 template<typename T>
 istream &operator>>(istream &is, vector<T> &v) {
     for(T &in : v) is >> in;
