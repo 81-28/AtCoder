@@ -237,6 +237,8 @@ int main() {
     
     // 文字列の置換
     str.replace(7, 5, "AtCoder");
+    // charに置換する場合
+    str.replace(0,1,std::string(1,str[7]));
 
     // 出力例
     std::cout << str << std::endl; // Hello, AtCoder!

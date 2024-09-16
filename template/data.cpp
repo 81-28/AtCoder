@@ -57,7 +57,7 @@ int main() {
         std::cout << "Vector is empty" << std::endl;
     }
 
-    // 3以上の最小の要素
+    // 3以上の最小の要素(ソート済みでないと正しい結果は得られない)
     auto it = lower_bound(vec.begin(), vec.end(), 3);
     // 距離(index)を求める
     std::cout << distance(vec.begin(),it) << std::endl;
@@ -488,6 +488,11 @@ int main() {
 
 int main() {
     std::priority_queue<int> pq;
+
+    // デフォルトと同じ
+    priority_queue<int, vector<int>, less<int>> T;
+    // これを使うと逆順
+    priority_queue<int, vector<int>, greater<int>> T;
 
     // 要素の追加
     pq.push(5);

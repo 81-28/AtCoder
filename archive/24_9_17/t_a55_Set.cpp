@@ -1,4 +1,4 @@
-// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ay
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bc
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -21,16 +21,17 @@ int main() {
 
     int q;
     cin >> q;
-    stack<string> s;
-    int qu;
-    string x;
+    set<int> s;
+    int query,x;
     rep(i,q) {
-        cin >> qu;
-        if (qu == 1) {
-            cin >> x;
-            s.push(x);
-        } else if (qu == 2) print(s.top());
-        else if (qu == 3) s.pop();
+        cin >> query >> x;
+        if (query == 1) s.insert(x);
+        if (query == 2) s.erase(x);
+        if (query == 3) {
+            auto it = s.lower_bound(x);
+            if (it == s.end()) print(-1);
+            else print(*it);
+        }
     }
 
     return 0;
