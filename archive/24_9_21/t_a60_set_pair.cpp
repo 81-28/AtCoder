@@ -4,6 +4,7 @@
 using namespace std;
 
 #define rep1(i, n) for (int i = 1; i < (int)(n+1); i++)
+using pii = pair<int,int>;
 
 #define fastio() ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
 void print() { cout << '\n'; }
@@ -21,20 +22,16 @@ int main() {
 
     int n;
     cin >> n;
-    set<int> sa;
-    map<int,int> m;
-    int a;
+    set<pii> sa;
+    pii p;
     rep1(i,n) {
-        cin >> a;
-        auto it = sa.upper_bound(a);
-        if (it == sa.end()) {
-            print(-1);
-        } else {
-            print(m[*it]);
-        }
-        sa.insert(a);
-        while (*sa.begin() != a) sa.erase(sa.begin());
-        m[a] = i;
+        cin >> p.first;
+        auto it = sa.upper_bound(p);
+        if (it == sa.end()) print(-1);
+        else print((*it).second);
+        p.second = i;
+        sa.insert(p);
+        while ((*sa.begin()).first != p.first) sa.erase(sa.begin());
     }
 
     return 0;
