@@ -1,12 +1,25 @@
-// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bn
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bo
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define YesNo(bool) if(bool){cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
+#define pb(a) push_back(a)
+#define all(v) v.begin(), v.end()
+template<typename T>
+using v = vector<T>;
+using vi = v<int>;
+using pii = pair<int,int>;
 
 #define fastio() ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+void print() { cout << '\n'; }
+template<typename T>
+void print(const T &t) { cout << t << '\n'; }
+template<typename Head, typename... Tail>
+void print(const Head &head, const Tail &... tail) {
+    cout << head << ' ';
+    print(tail...);
+}
 
 
 class UnionFind {
@@ -48,15 +61,32 @@ public:
 int main() {
     fastio();
 
-    int n,q;
-    cin >> n >> q;
-    UnionFind uf(n);
-    int t,u,v;
-    rep(k,q) {
-        cin >> t >> u >> v;
-        if (t == 1) uf.unite(u,v);
-        if (t == 2) YesNo(uf.same(u,v));
+    int n,m;
+    cin >> n >> m;
+    vi a(m),b(m);
+    int c;
+    v<pii> edgeList;
+    rep(i,m) {
+        cin >> a[i] >> b[i] >> c;
+        edgeList.pb(pii({c,i}));
     }
+    // コストが低い順にソート
+    sort(all(edgeList));
+
+    UnionFind uf(n);
+    int ans = 0;
+    int u,v,cost;
+    rep(i,m) {
+        int j = edgeList[i].second;
+        u = a[j], v = b[j];
+        cost = edgeList[i].first;
+        // 2辺が別のグループに属している場合、繋げる
+        if (!uf.same(u,v)) {
+            uf.unite(u,v);
+            ans += cost;
+        }
+    }
+    print(ans);
 
     return 0;
 }
