@@ -23,6 +23,13 @@ public:
     int root(int x) {
         if (par[x] == -1) return x; // 親が無いとき、それが根
         else return par[x] = root(par[x]); // 経路圧縮して親に移動
+
+        // 経路圧縮しない場合
+        // while (true) {
+        //     if (par[x] == -1) break; // 親が無いとき、それが根
+        //     x = par[x]; // 親に移動
+        // }
+        // return x;
     }
 
     // 頂点uとvを繋げる関数(sizが大きい方に根を統合)
