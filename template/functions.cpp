@@ -10,21 +10,30 @@ using namespace std;
 // #include <atcoder/all>
 // using namespace atcoder;
 
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define rep1(i, n) for (int i = 1; i < (int)(n+1); i++)
+#define rep(i,n) for (int i=0; i<(int)(n); i++)
+#define rep1(i,n) for (int i=1; i<(int)(n+1); i++)
+#define rep2(i,s,n) for (int i=(int)(s); i<(int)(n); i++)
+#define pb(a) push_back(a)
 #define all(v) v.begin(), v.end()
 #define rall(v) v.rbegin(), v.rend()
-#define YesNo(bool) if(bool){cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
 // substring : { s.begin()+l, s.begin()+r }
 #define substring(s,l,r) s.substr(l,r-l)
+#define YesNo(x) cout<<(x ? "Yes\n":"No\n")
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
-using P = pair<int,int>;
-using Graph = vector<vector<int>>;
+template<typename T>
+using v = vector<T>;
+using vi = v<int>;
+using vvi = v<vi>;
+using vll = v<ll>;
+using vvll = v<vll>;
+using pii = pair<int,int>;
+using pll = pair<ll,ll>;
 // using mint = modint1000000007;
 // using mint = modint998244353;
 
+#define fastio() ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
 template<typename T>
 istream &operator>>(istream &is, vector<T> &v) {
     for(T &in : v) is >> in;
