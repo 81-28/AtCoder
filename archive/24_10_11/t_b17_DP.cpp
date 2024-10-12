@@ -4,6 +4,8 @@
 using namespace std;
 
 #define rep2(i,s,n) for (int i=(int)(s); i<(int)(n); i++)
+#define pb(a) push_back(a)
+#define all(v) v.begin(), v.end()
 template<typename T>
 using v = vector<T>;
 using vi = v<int>;
@@ -57,7 +59,8 @@ int main() {
         }
     }
     vi anss;
-    for (int i = n; i != 0; i = p[i]) anss.insert(anss.begin(),i);
+    for (int i = n; i != 0; i = p[i]) anss.pb(i);
+    reverse(all(anss));
     print(anss.size());
     print(anss);
 
