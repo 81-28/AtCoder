@@ -1,4 +1,4 @@
-// 
+// https://atcoder.jp/contests/abc376/tasks/abc376_f
 
 // Ctrl + Shift + B                => Build
 // Terminal : "./a.out"            => Run
@@ -72,21 +72,67 @@ T min(const T& a, const T& b, const T& c, const Args&... args) { return min({a,b
 int main() {
     fastio();
 
-    int n;
-    cin >> n;
-    vi a(n);
-    cin >> a;
-
-
+    int n,q;
+    cin >> n >> q;
     int ans = 0;
+    v<char> h(q);
+    vi t(q);
+    int l = 1, r = 2;
+    int add;
+    vi vl,vr;
+    rep(i,q) {
+        cin >> h[i] >> t[i];
+        if (h[i] == 'L') vl.pb(i);
+        else vr.pb(i);
+    }
+    int inL = 0,inR = 0;
+    rep(i,q) {
+        add = n;
+        if (h[i] == 'L') {
+            if ((l < t[i] && t[i] < r) || (r < l && l < t[i]) || (t[i] < r && r < l)) {
+                if (add > (t[i]+n-l)%n) {
+                    add = (t[i]+n-l)%n;
+                }
+                if (add > ((l+n-t[i])%n)+((r+n-(t[i]-1))%n)+((vr[inR]+n-(t[i]-1))%n)) {
+                    add = ((l+n-t[i])%n)+((r+n-(t[i]-1))%n);
+                    r = t[i]-1;
+                }
+            } else {
+                if (add > (l+n-t[i])%n && t[i] != r) {
+                    add = (l+n-t[i])%n;
+                }
+                if (add > ((t[i]+n-l)%n)+((t[i]+1+n-r)%n)+(((t[i]+1)+n-vr[inR])%n)) {
+                    add = ((t[i]+n-l)%n)+((t[i]+1+n-r)%n);
+                    r = t[i]+1;
+                }
+            }
+            l = t[i];
+            inL++;
+        }
+        if (h[i] == 'R') {
+            if ((r < t[i] && t[i] < l) || (l < r && r < t[i]) || (t[i] < l && l < r)) {
+                if (add > (t[i]+n-r)%n) {
+                    add = (t[i]+n-r)%n;
+                }
+                if (add > ((r+n-t[i])%n)+((l+n-(t[i]-1))%n)+((vl[inL]+n-(t[i]-1))%n)) {
+                    add = ((r+n-t[i])%n)+((l+n-(t[i]-1))%n);
+                    l = t[i]-1;
+                }
+            } else {
+                if (add > (r+n-t[i])%n && t[i] != l) {
+                    add = (r+n-t[i])%n;
+                }
+                if (add > ((t[i]+n-r)%n)+((t[i]+1+n-l)%n)+(((t[i]+1)+n-vl[inL])%n)) {
+                    add = ((t[i]+n-r)%n)+((t[i]+1+n-l)%n);
+                    l = t[i]+1;
+                }
+            }
+            r = t[i];
+            inR++;
+        }
+        ans += add;
+    }
     print(ans);
-
-    vi anss(n,0);
-    print(anss);
-
-    vvi ansss(n,vi(n,0));
-    rep(i,n) print(ansss[i]);
-
 
     return 0;
 }
