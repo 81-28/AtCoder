@@ -12,13 +12,12 @@ using namespace std;
 
 #define rep(i,n) for (int i=0; i<(int)(n); i++)
 #define rep1(i,n) for (int i=1; i<(int)(n+1); i++)
-#define rep2(i,s,n) for (int i=(int)(s); i<(int)(n); i++)
 #define pb(a) push_back(a)
 #define all(v) v.begin(), v.end()
 #define rall(v) v.rbegin(), v.rend()
 // substring : { s.begin()+l, s.begin()+r }
 #define substring(s,l,r) s.substr(l,r-l)
-#define YesNo(x) cout<<(x ? "Yes\n":"No\n")
+#define YesNo(x) cout<<(x?"Yes\n":"No\n")
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
