@@ -10,8 +10,8 @@ int main() {
 
     int n,x,y;
     cin >> n >> x >> y;
-    vector<int> grundy(5);
-    rep(i,5) {
+    vector<int> grundy(x+y);
+    rep(i,x+y) {
         vector<bool> transit(3,false);
         if (i >= x) transit[grundy[i-x]] = true;
         if (i >= y) transit[grundy[i-y]] = true;
@@ -24,7 +24,7 @@ int main() {
     ll a;
     rep(_,n) {
         cin >> a;
-        s ^= grundy[a%5];
+        s ^= grundy[a%(x+y)];
     }
     cout<<(s?"First\n":"Second\n");
 
