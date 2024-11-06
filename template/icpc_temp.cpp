@@ -35,6 +35,8 @@ template<typename T>
 istream &operator>>(istream &is,vector<T> &v){for(T &in:v)is>>in;return is;}
 template<typename T>
 ostream &operator<<(ostream &os,const vector<T> &v){for(int i=0;i<(int)v.size();i++)os<<(i?" ":"")<<v[i];return os;}
+template<typename F,typename S>
+ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<" "<<p.second;return os;}
 void print(){cout<<'\n';}
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<'\n';}
