@@ -10,8 +10,12 @@ template<typename T>
 using v=vector<T>;
 using pii=pair<int,int>;
 
+// template<typename T>
+// ostream &operator<<(ostream &os,const vector<T> &v){for(int i=0;i<(int)v.size();i++)os<<(i?"\n":"")<<v[i];return os;}
+// template<typename F,typename S>
+// ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<" "<<p.second;return os;}
 template<typename F,typename S>
-ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<" "<<p.second;return os;}
+ostream &operator<<(ostream &os,const vector<pair<F,S>> &v){for(int i=0;i<(int)v.size();i++)os<<(i?"\n":"")<<v[i].first<<" "<<v[i].second;return os;}
 void print(){cout<<'\n';}
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<'\n';}
@@ -23,15 +27,17 @@ int main(){
     int x,y;
     cin >> x >> y;
     v<pii> anss;
-    for(int i=1; x*y!=1; i++) {
+    while(x!=y) {
         anss.pb({x,y});
         if(x>y) x-=y;
         else y-=x;
     }
-    reverse(all(anss));
     int n = anss.size();
+    // cout<<n<<'\n';
+    // for(int i=n-1; i>=0; i--) cout<<anss[i].first<<' '<<anss[i].second<<'\n';
+    reverse(all(anss));
     print(n);
-    rep(i,n) print(anss[i]);
+    print(anss);
 
     return 0;
 }
