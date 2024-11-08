@@ -10,6 +10,7 @@ template<typename T>
 using v=vector<T>;
 using pii=pair<int,int>;
 
+// AtCoder上だと上手くいかない
 // template<typename T>
 // ostream &operator<<(ostream &os,const vector<T> &v){for(int i=0;i<(int)v.size();i++)os<<(i?"\n":"")<<v[i];return os;}
 // template<typename F,typename S>
