@@ -15,13 +15,10 @@ int main(){
     string s;
     cin >> n >> d >> s;
     int j = 0;
-    for(int i=n-1; n>=0; i--) {
+    for(int i=n-1; j!=d; i--) {
         if (s[i] == '@') {
             s[i] = '.';
             j++;
-        }
-        if (j==d) {
-            break;
         }
     }
     print(s);

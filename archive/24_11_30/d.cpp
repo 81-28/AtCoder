@@ -32,7 +32,6 @@ int main(){
         while(j>=0) {
             if (a[i][j] > d) {
                 a[i][j-1]++;
-                a[i][j] = a[i][j-1];
                 j--;
             } else break;
         }
