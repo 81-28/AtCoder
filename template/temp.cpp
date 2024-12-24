@@ -16,6 +16,8 @@ using namespace std;
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
 #define substring(s,l,r) s.substr(l,r-l)
+#define f first
+#define s second
 #define YesNo(x) cout<<(x?"Yes\n":"No\n")
 using ll=long long;
 using ull=unsigned long long;
@@ -48,8 +50,8 @@ template<typename T>
 T max(const vector<T>& v){return *max_element(v.begin(),v.end());}
 template<typename T>
 T min(const vector<T>& v){return *min_element(v.begin(),v.end());}
-#define max(...) (*max_element({__VA_ARGS__}))
-#define min(...) (*min_element({__VA_ARGS__}))
+// #define max(...) (*max_element({__VA_ARGS__}))
+// #define min(...) (*min_element({__VA_ARGS__}))
 
 
 int main(){
