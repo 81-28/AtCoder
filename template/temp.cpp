@@ -16,8 +16,8 @@ using namespace std;
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
 #define substring(s,l,r) s.substr(l,r-l)
-#define f first
-#define s second
+// #define f first
+// #define s second
 #define YesNo(x) cout<<(x?"Yes\n":"No\n")
 using ll=long long;
 using ull=unsigned long long;
