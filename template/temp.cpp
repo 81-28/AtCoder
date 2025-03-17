@@ -11,14 +11,14 @@ using namespace std;
 // using namespace atcoder;
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
-#define rep1(i,n) for(int i=1;i<(int)(n+1);i++)
+#define rep1(i,n) for(int i=1;i<=(int)(n);i++)
 #define pb push_back
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
 #define substring(s,l,r) s.substr(l,r-l)
+#define YesNo(x) puts(x?"Yes":"No")
 // #define f first
 // #define s second
-#define YesNo(x) cout<<(x?"Yes\n":"No\n")
 using ll=long long;
 using ull=unsigned long long;
 using ld=long double;
@@ -33,8 +33,11 @@ using pll=pair<ll,ll>;
 // using mint=modint1000000007;
 // using mint=modint998244353;
 
+// inもoutもAtCoderではvectorとpair組み合わせて使えない
 template<typename T>
 istream &operator>>(istream &is,vector<T> &v){for(T &in:v)is>>in;return is;}
+template<typename F,typename S>
+istream &operator>>(istream &is,pair<F,S> &p){is>>p.first>>p.second;return is;}
 template<typename T>
 ostream &operator<<(ostream &os,const vector<T> &v){for(int i=0;i<(int)v.size();i++)os<<(i?" ":"")<<v[i];return os;}
 template<typename F,typename S>
@@ -50,8 +53,6 @@ template<typename T>
 T max(const vector<T>& v){return *max_element(v.begin(),v.end());}
 template<typename T>
 T min(const vector<T>& v){return *min_element(v.begin(),v.end());}
-// #define max(...) (*max_element({__VA_ARGS__}))
-// #define min(...) (*min_element({__VA_ARGS__}))
 
 
 int main(){
@@ -59,18 +60,25 @@ int main(){
 
     int n;
     cin >> n;
+    string s;
+    cin >> s;
+    print(n,s);
+
     vi a(n);
     cin >> a;
+    print(a);
+    vvi g(n,vi(n,0));
+    cin >> g;
+    rep(i,n)print(g[i]);
 
-
-    int ans = 0;
-    print(ans);
-
-    vi anss(n,0);
-    print(anss);
-
-    vvi ansss(n,vi(n,0));
-    rep(i,n) print(ansss[i]);
+    pii p;
+    cin >> p;
+    print(p);
+    v<pii> b(n);
+    // cin >> b;
+    rep(i,n)cin>>b[i];
+    // print(b);
+    rep(i,n)print(b[i]);
 
 
     return 0;
