@@ -11,13 +11,6 @@ using v=vector<T>;
 using vi=v<int>;
 
 
-bool isEqual(const string& s, const int& n) {
-    rep(i,n) {
-        if (s[i]!=s[n-1-i]) return 0;
-    }
-    return 1;
-}
-
 int main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
@@ -33,20 +26,22 @@ int main(){
         smatch match = *i;
         pos.pb(match.position());
     }
-    
-    // for (int i=n; i>=0; i--) {
-    //     if (isEqual(s.substr(n-i,i),i)) {
-    //         cout<<s;
-    //         rep(j,n-i) cout<<s[n-i-1-j];
-    //         cout<<'\n';
-    //         return 0;
-    //     }
-    // }
 
-    for (int i=0; i<(int)pos.size(); i++) {
-        if (isEqual(s.substr(pos[i],n-pos[i]),n-pos[i])) {
+    bool ok;
+    int l,r;
+    for(int val:pos) {
+        ok=1;
+        l=val,r=n-1;
+        while (l<r) {
+            if (s[l]!=s[r]) {
+                ok=0;
+                break;
+            }
+            l++,r--;
+        }
+        if (ok) {
             cout<<s;
-            rep(j,pos[i]) cout<<s[pos[i]-1-j];
+            rep(i,val) cout<<s[val-1-i];
             cout<<'\n';
             return 0;
         }

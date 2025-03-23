@@ -4,6 +4,7 @@
 using namespace std;
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
+#define rall(v) v.rbegin(),v.rend()
 using ll=long long;
 template<typename T>
 using v=vector<T>;
@@ -30,10 +31,12 @@ int main(){
         m[a[i]]++;
         mp[a[i]] = i+1;
     }
+    sort(rall(a));
     ll ans=-1;
     rep(i,n) {
         if (m[a[i]]==1) {
-            ans=max(ans,a[i]);
+            ans=a[i];
+            break;
         }
     }
     print(mp[ans]);

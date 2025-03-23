@@ -4,7 +4,6 @@
 using namespace std;
 
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
-#define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
 #define YesNo(x) puts(x?"Yes":"No")
 template<typename T>
@@ -20,11 +19,10 @@ int main(){
 
     vi a(7);
     cin >> a;
-    sort(all(a));
     vi c(14,0);
     rep(i,7) c[a[i]]++;
     sort(rall(c));
-    YesNo(c[0] >= 3 && c[1] >= 2);
+    YesNo(c[0]>2 && c[1]>1);
 
     return 0;
 }
