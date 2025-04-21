@@ -31,7 +31,7 @@ int main(){
         dist=min(p.f,n-p.s);
         p.f-=dist,p.s+=dist;
         p.s%=n;
-        deg=max(p.f,p.s);
+        deg=p.f+p.s;
         ans+=i-mp[deg];
         mp[deg]++;
     }
