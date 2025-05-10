@@ -10,8 +10,8 @@ using namespace std;
 // #include <atcoder/all>
 // using namespace atcoder;
 
-#define rep(i,n) for(int i=0;i<(int)(n);i++)
-#define rep1(i,n) for(int i=1;i<=(int)(n);i++)
+#define rep(i,n) for(int i=0;i<(int)(n);++i)
+#define rep1(i,n) for(int i=1;i<=(int)(n);++i)
 #define pb push_back
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
@@ -39,16 +39,16 @@ istream &operator>>(istream &is,vector<T> &v){for(T &in:v)is>>in;return is;}
 template<typename F,typename S>
 istream &operator>>(istream &is,pair<F,S> &p){is>>p.first>>p.second;return is;}
 template<typename T>
-ostream &operator<<(ostream &os,const vector<T> &v){for(int i=0;i<(int)v.size();i++)os<<(i?" ":"")<<v[i];return os;}
+ostream &operator<<(ostream &os,const vector<T> &v){for(int i=0;i<(int)v.size();++i)os<<(i?" ":"")<<v[i];return os;}
 template<typename F,typename S>
 ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<" "<<p.second;return os;}
 void print(){cout<<'\n';}
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<'\n';}
 
+// セグ木使おう
 template<typename T>
 auto sum(const vector<T>& v){return accumulate(v.begin(),v.end(),T{});}
-
 template<typename T>
 T max(const vector<T>& v){return *max_element(v.begin(),v.end());}
 template<typename T>
