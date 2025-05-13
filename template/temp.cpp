@@ -19,6 +19,8 @@ using namespace std;
 #define YesNo(x) puts(x?"Yes":"No")
 // #define f first
 // #define s second
+const int dx[4] = {0,1,0,-1};
+const int dy[4] = {-1,0,1,0};
 using ll=long long;
 using ull=unsigned long long;
 using ld=long double;
