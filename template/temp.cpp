@@ -32,7 +32,7 @@ using vll=v<ll>;
 using vvll=v<vll>;
 using pii=pair<int,int>;
 using pll=pair<ll,ll>;
-const pii dir[4]={{-1,0},{1,0},{0,-1},{0,1}};
+const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 // using mint=modint1000000007;
 // using mint=modint998244353;
 
