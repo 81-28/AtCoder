@@ -12,6 +12,7 @@ using v=vector<T>;
 using pii=pair<int,int>;
 using pll=pair<ll,ll>;
 const pii dir[4]={{-1,0},{1,0},{0,-1},{0,1}};
+// const pii dir[8]={{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1}};
 
 template<typename F,typename S>istream &operator>>(istream &is,pair<F,S> &p){is>>p.f>>p.s;return is;}
 template<typename F,typename S> ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.f<<" "<<p.s;return os;}
@@ -48,6 +49,13 @@ template<typename F,typename S,typename T> pair<F,S> operator*(const pair<F,S>& 
 template<typename F,typename S,typename T> pair<F,S> operator*(const T& a,const pair<F,S>& p){return{a*p.f,a*p.s};}
 // pairの乗算代入 (定数)
 template<typename F,typename S,typename T> pair<F,S>& operator*=(pair<F,S>& p,const T& a){p.f*=a;p.s*=a;return p;}
+
+// pairと定数の割り算
+template<typename F,typename S,typename T> pair<F,S> operator/(const pair<F,S>& p,const T& a){return{p.f/a,p.s/a};}
+// // 定数とpairの割り算
+// template<typename F,typename S,typename T> pair<F,S> operator/(const T& a,const pair<F,S>& p){return{a/p.f,a/p.s};}
+// pairの除算代入 (定数)
+template<typename F,typename S,typename T> pair<F,S>& operator/=(pair<F,S>& p,const T& a){p.f/=a;p.s/=a;return p;}
 
 
 int main(){
