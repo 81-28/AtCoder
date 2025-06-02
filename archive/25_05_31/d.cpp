@@ -11,7 +11,6 @@ template<class T> constexpr bool chmin(T& a,T b){if(a>b){a=b;return 1;}return 0;
 using ll=long long;
 template<typename T>
 using v=vector<T>;
-using vll=v<ll>;
 using pll=pair<ll,ll>;
 
 template<typename Head,typename... Tail>
@@ -53,19 +52,18 @@ int main(){
             continue;
         }
         ll ans=LLONG_MAX;
-        ll nn=p.size();
-        vll dp(nn+1,nn);
-        dp[0]=0;
+        n=p.size();
+        ll dp;
         ll th1=0;
-        rep(i,nn) {
+        rep(i,n) {
             if (p[i].f) {
                 if (i-2<0) {
-                    dp[i]=0;
+                    dp=0;
                 } else {
-                    dp[i]=min(dp[i-2]+p[i-1].s,th1);
+                    dp=min(dp+p[i-1].s,th1);
                 }
                 cnt1-=p[i].s;
-                chmin(ans,dp[i]+cnt1);
+                chmin(ans,dp+cnt1);
                 th1+=p[i].s;
             }
         }
