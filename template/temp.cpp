@@ -6,7 +6,7 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-// #define int long long
+#define int ll
 // #include<atcoder/all>
 // using namespace atcoder;
 
@@ -28,10 +28,7 @@ template<typename T>
 using v=vector<T>;
 using vi=v<int>;
 using vvi=v<vi>;
-using vll=v<ll>;
-using vvll=v<vll>;
 using pii=pair<int,int>;
-using pll=pair<ll,ll>;
 const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 // const pii dir[8]={{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1}};
 // using mint=modint1000000007;
@@ -71,7 +68,7 @@ template<typename T>
 T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 
 
-int main(){
+signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
     int n;
