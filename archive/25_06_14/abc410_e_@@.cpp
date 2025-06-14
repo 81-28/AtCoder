@@ -1,16 +1,21 @@
-// 
-
-// Ctrl + Shift + B                => Build
-// Terminal : "./a.out"            => Run
-// Terminal : "./a.out < ./in.txt" => Run
+// https://atcoder.jp/contests/abc410/tasks/abc410_e
 
 #include<bits/stdc++.h>
 using namespace std;
-// #include<atcoder/all>
-// using namespace atcoder;
-
-using ll=long long;
 #define int ll
+
+#define rep(i,n) for(int i=0;i<(int)(n);++i)
+#define rep1(i,n) for(int i=1;i<=(int)(n);++i)
+#define pb push_back
+#define all(v) v.begin(),v.end()
+#define rall(v) v.rbegin(),v.rend()
+#define substring(s,l,r) s.substr(l,r-l)
+template<class T> constexpr bool chmax(T& a,T b){if(a<b){a=b;return 1;}return 0;}
+template<class T> constexpr bool chmin(T& a,T b){if(a>b){a=b;return 1;}return 0;}
+#define YesNo(x) puts(x?"Yes":"No")
+#define f first
+#define s second
+using ll=long long;
 using ull=unsigned long long;
 using ld=long double;
 template<typename T>
@@ -22,17 +27,6 @@ const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 // const pii dir[8]={{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1}};
 // using mint=modint1000000007;
 // using mint=modint998244353;
-#define rep(i,n) for(int i=0;i<(int)(n);++i)
-#define rep1(i,n) for(int i=1;i<=(int)(n);++i)
-#define pb push_back
-#define all(v) v.begin(),v.end()
-#define rall(v) v.rbegin(),v.rend()
-#define substring(s,l,r) s.substr(l,r-l)
-template<class T>constexpr bool chmax(T& a,T b){if(a<b){a=b;return 1;}return 0;}
-template<class T>constexpr bool chmin(T& a,T b){if(a>b){a=b;return 1;}return 0;}
-#define YesNo(x) puts(x?"Yes":"No")
-// #define f first
-// #define s second
 
 // inもoutもAtCoderではvectorとpair組み合わせて使えない
 template<typename T>
@@ -71,28 +65,46 @@ T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    print(n,s);
-
-    vi a(n);
-    cin >> a;
-    print(a);
-    vvi g(n,vi(n,0));
-    cin >> g;
-    rep(i,n)print(g[i]);
-
-    pii p;
-    cin >> p;
-    print(p);
-    v<pii> b(n);
-    // cin >> b;
-    rep(i,n)cin>>b[i];
-    // print(b);
-    rep(i,n)print(b[i]);
-
+    int n,h,m;
+    cin >> n >> h >> m;
+    // dp[i][j][k]:i体目で{h,m}={j,k}が可能かどうか
+    // v<v<v<bool>>> dp(n+1,v<v<bool>>(h+1,v<bool>(m+1,0)));
+    v<map<pii,bool>> dp(n+1);
+    dp[0][{h,m}]=1;
+    rep1(i,n) {
+        pii p;
+        cin >> p;
+        bool ok=0;
+        // rep(j,h+1)rep(k,m+1) {
+        //     if (j+p.f<=h && dp[i-1][j+p.f][k]) {
+        //         dp[i][j][k]=1;
+        //         ok=1;
+        //     }
+        //     if (k+p.s<=m && dp[i-1][j][k+p.s]) {
+        //         dp[i][j][k]=1;
+        //         ok=1;
+        //     }
+        // }
+        for (auto it=dp[i-1].rbegin();it!=dp[i-1].rend();++it) {
+            auto pp=*it;
+            int j,k;
+            j=pp.f.f-p.f,k=pp.f.s;
+            if (j>=0) {
+                dp[i][{j,k}]=1;
+                ok=1;
+            }
+            j=pp.f.f,k=pp.f.s-p.s;
+            if (k>=0) {
+                dp[i][{j,k}]=1;
+                ok=1;
+            }
+        }
+        if (!ok) {
+            print(i-1);
+            return 0;
+        }
+    }
+    print(n);
 
     return 0;
 }
