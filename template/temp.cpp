@@ -44,7 +44,7 @@ ostream &operator<<(ostream &os,const v<T> &v){for(int i=0;i<(int)v.size();++i)o
 template<typename F,typename S>
 ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<' '<<p.second;return os;}
 template<typename Head,typename... Tail>
-void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<'\n';}
+void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
 
 // // pairの足し算
 // template<typename F,typename S>
