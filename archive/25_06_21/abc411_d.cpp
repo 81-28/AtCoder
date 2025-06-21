@@ -5,6 +5,7 @@ using namespace std;
 
 template<typename T>
 using v=vector<T>;
+using vi=v<int>;
 using pii=pair<int,int>;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
 #define pb push_back
@@ -25,13 +26,13 @@ signed main(){
         if (qu[i].f.f==2) cin >> qu[i].s;
     }
     int idx=-1;
-    v<string> st;
+    vi st;
     for (int i=q-1; i>=0; --i) {
         if (qu[i].f.f==1 && qu[i].f.s==idx) idx=-1;
-        if (qu[i].f.f==2 && qu[i].f.s==idx) st.pb(qu[i].s);
+        if (qu[i].f.f==2 && qu[i].f.s==idx) st.pb(i);
         if (qu[i].f.f==3 && idx==-1) idx=qu[i].f.s;
     }
-    for (int i=st.size()-1; i>=0; --i) cout<<st[i];
+    for (int i=st.size()-1; i>=0; --i) cout<<qu[st[i]].s;
     cout<<endl;
 
     return 0;
