@@ -93,6 +93,10 @@ signed main(){
     // print(b);
     rep(i,n)print(b[i]);
 
+    double d;
+    cin >> d;
+    cout<<fixed<<setprecision(16);
+    print(d);
 
     return 0;
 }

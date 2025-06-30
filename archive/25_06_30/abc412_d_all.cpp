@@ -45,7 +45,7 @@ signed main(){
         int add=0;
         rep(i,n) {
             int j=(i+1)%n;
-            if (!g[p[i]][p[j]]||!g[p[j]][p[i]]) ++add;
+            if (!g[p[i]][p[j]]) ++add;
         }
         chmin(ans,m+add*2-n);
         for (int i=3; i<=n/2&&n-i>2; i++) {
@@ -54,7 +54,7 @@ signed main(){
                 int k=j+1;
                 if (k==i) k=0;
                 if (k==n) k=i;
-                if (!g[p[j]][p[k]]||!g[p[k]][p[j]]) ++add;
+                if (!g[p[j]][p[k]]) ++add;
             }
             chmin(ans,m+add*2-n);
         }
