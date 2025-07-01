@@ -62,13 +62,13 @@ int main() {
     // 2番目のを参考
     // https://atcoder.jp/contests/abc213/submissions/24849187
 
-    vector<int> a(n), b(n);
-    rep(i,n) cin >> a[i] >> b[i];
-    a = compress(a);
-    b = compress(b);
-    rep(i,n) {
-        printf("%d %d\n", a[i], b[i]);
-    }
+    // vector<int> a(n), b(n);
+    // rep(i,n) cin >> a[i] >> b[i];
+    // a = compress(a);
+    // b = compress(b);
+    // rep(i,n) {
+    //     printf("%d %d\n", a[i], b[i]);
+    // }
 
 
     return 0;
