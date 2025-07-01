@@ -20,25 +20,26 @@ void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),
 int h,w;
 vvll a;
 v<v<bool>> b;
-ll ans=0;
+ll ans=0,x=0;
 void dfs(const int& n) {
-    if (n==h*w-1) {
-        ll res=0;
-        rep(i,h)rep(j,w) res^=b[i][j]?0:a[i][j];
-        chmax(ans,res);
-    } else {
+    if (n==h*w-1) chmax(ans,x);
+    else {
         dfs(n+1);
         int i=n/w,j=n%w;
         if (!b[i][j]) {
             if (i+1<h && !b[i+1][j]) {
                 b[i][j]=1,b[i+1][j]=1;
+                x^=a[i][j],x^=a[i+1][j];
                 dfs(n+1);
                 b[i][j]=0,b[i+1][j]=0;
+                x^=a[i][j],x^=a[i+1][j];
             }
             if (j+1<w && !b[i][j+1]) {
                 b[i][j]=1,b[i][j+1]=1;
+                x^=a[i][j],x^=a[i][j+1];
                 dfs(n+1);
                 b[i][j]=0,b[i][j+1]=0;
+                x^=a[i][j],x^=a[i][j+1];
             }
         }
     }
@@ -50,6 +51,7 @@ int main(){
     cin >> h >> w;
     a = vvll(h,vll(w));
     cin >> a;
+    rep(i,h)rep(j,w) x^=a[i][j];
     b = v<v<bool>>(h,v<bool>(w,0));
     dfs(0);
     print(ans);
