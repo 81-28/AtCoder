@@ -489,9 +489,9 @@ int main() {
 int main() {
     std::priority_queue<int> pq;
 
-    // デフォルトと同じ
+    // デフォルト(降順)
     priority_queue<int, vector<int>, less<int>> T;
-    // これを使うと逆順
+    // これを使うと逆順(昇順)
     priority_queue<int, vector<int>, greater<int>> T;
 
     // 要素の追加
