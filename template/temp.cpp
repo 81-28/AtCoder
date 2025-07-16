@@ -27,14 +27,15 @@ const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 #define pb push_back
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
+#define uniq(v) v.erase(unique(v.begin(),v.end()),v.end()); // sort後に使用する
 #define substring(s,l,r) s.substr(l,r-l)
-template<class T>constexpr bool chmax(T& a,T b){if(a<b){a=b;return 1;}return 0;}
-template<class T>constexpr bool chmin(T& a,T b){if(a>b){a=b;return 1;}return 0;}
+template<typename T>inline bool chmax(T& a,const T& b){if(a<b){a=b;return 1;}return 0;}
+template<typename T>inline bool chmin(T& a,const T& b){if(a>b){a=b;return 1;}return 0;}
 #define YesNo(x) puts(x?"Yes":"No")
 // #define f first
 // #define s second
 
-// inもoutもAtCoderではvectorとpair組み合わせて使えない
+// AtCoderでは、inもoutもvector,pair,tuple組み合わせて使えない
 template<typename T>
 istream &operator>>(istream &is,v<T> &v){for(T &in:v)is>>in;return is;}
 template<typename F,typename S>
@@ -43,6 +44,10 @@ template<typename T>
 ostream &operator<<(ostream &os,const v<T> &v){for(int i=0;i<(int)v.size();++i)os<<(i?" ":"")<<v[i];return os;}
 template<typename F,typename S>
 ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<' '<<p.second;return os;}
+template<typename... Args>
+istream &operator>>(istream &is,tuple<Args...> &t){apply([&is](auto&... args){((is>>args),...);},t);return is;}
+template<typename... Args>
+ostream &operator<<(ostream &os,const tuple<Args...> &t){apply([&os](const auto&... args){int i=0;((os<<(i++?" ":"")<<args),...);},t);return os;}
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
 
@@ -89,9 +94,24 @@ signed main(){
     print(p);
     v<pii> b(n);
     // cin >> b;
-    rep(i,n)cin>>b[i];
+    rep(i,n)cin >> b[i];
     // print(b);
     rep(i,n)print(b[i]);
+
+    tuple<int,string,double> t;
+    // cin >> get<0>(t) >> get<1>(t) >> get<2>(t);
+    cin >> t;
+    // print(get<0>(t),get<1>(t),get<2>(t));
+    print(t);
+    // auto&[x,y,z]=t;
+    // cin >> x >> y >> z;
+    // print(x,y,z);
+
+    v<tuple<int,int,int>> c(n);
+    // cin >> c;
+    rep(i,n)cin >> c[i];
+    // print(c);
+    rep(i,n)print(c[i]);
 
     double d;
     cin >> d;
