@@ -19,7 +19,6 @@ signed main(){
     mint ans=1;
     queue<mint> qu;
     qu.push(1);
-    mint e=1;
     while (q--) {
         int n;
         cin >> n;
@@ -28,17 +27,13 @@ signed main(){
             cin >> x;
             ans=ans*10+x;
             qu.push(x);
-            e*=10;
         }
         if (n==2) {
             mint m=qu.front();
             qu.pop();
-            ans-=m*e;
-            e/=10;
+            ans-=m*mint(10).pow(qu.size());
         }
-        if (n==3) {
-            print(ans.val());
-        }
+        if (n==3) print(ans.val());
     }
 
     return 0;
