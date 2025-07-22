@@ -32,25 +32,9 @@ const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 template<typename T>inline bool chmax(T& a,const T& b){if(a<b){a=b;return 1;}return 0;}
 template<typename T>inline bool chmin(T& a,const T& b){if(a>b){a=b;return 1;}return 0;}
 #define YesNo(x) puts(x?"Yes":"No")
+
 // #define f first
 // #define s second
-
-// AtCoderでは、inもoutもvector,pair,tuple組み合わせて使えない
-template<typename T>
-istream &operator>>(istream &is,v<T> &v){for(T &in:v)is>>in;return is;}
-template<typename F,typename S>
-istream &operator>>(istream &is,pair<F,S> &p){is>>p.first>>p.second;return is;}
-template<typename T>
-ostream &operator<<(ostream &os,const v<T> &v){for(int i=0;i<(int)v.size();++i)os<<(i?" ":"")<<v[i];return os;}
-template<typename F,typename S>
-ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<' '<<p.second;return os;}
-template<typename... Args>
-istream &operator>>(istream &is,tuple<Args...> &t){apply([&is](auto&... args){((is>>args),...);},t);return is;}
-template<typename... Args>
-ostream &operator<<(ostream &os,const tuple<Args...> &t){apply([&os](const auto&... args){int i=0;((os<<(i++?" ":"")<<args),...);},t);return os;}
-template<typename Head,typename... Tail>
-void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
-
 // // pairの足し算
 // template<typename F,typename S>
 // pair<F,S> operator+(const pair<F,S>& a,const pair<F,S>& b){return{a.f+b.f,a.s+b.s};}
@@ -63,6 +47,22 @@ void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),
 // // 定数とpairの掛け算
 // template<typename F,typename S,typename T>
 // pair<F,S> operator*(const T& a,const pair<F,S>& p){return{a*p.f,a*p.s};}
+
+// AtCoderでは、inもoutもvector,pair,tuple組み合わせて使えない
+template<typename T>
+istream &operator>>(istream &is,v<T> &v){for(T &in:v)is>>in;return is;}
+template<typename T>
+ostream &operator<<(ostream &os,const v<T> &v){for(int i=0;i<(int)v.size();++i)os<<(i?" ":"")<<v[i];return os;}
+template<typename F,typename S>
+istream &operator>>(istream &is,pair<F,S> &p){is>>p.first>>p.second;return is;}
+template<typename F,typename S>
+ostream &operator<<(ostream &os,const pair<F,S> &p){os<<p.first<<' '<<p.second;return os;}
+template<typename... Args>
+istream &operator>>(istream &is,tuple<Args...> &t){apply([&is](auto&... args){((is>>args),...);},t);return is;}
+template<typename... Args>
+ostream &operator<<(ostream &os,const tuple<Args...> &t){apply([&os](const auto&... args){int i=0;((os<<(i++?" ":"")<<args),...);},t);return os;}
+template<typename Head,typename... Tail>
+void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
 
 // セグ木使おう
 template<typename T>
