@@ -14,7 +14,7 @@ void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),
 
 
 
-// セグ木 1-indexed
+// セグ木 0-indexed
 // max
 class SegmentTree_max {
 public:
@@ -25,7 +25,7 @@ public:
         vec=vector<int>(size*2,0);
     }
     void update(int pos,const int& x) {
-        pos+=size-1;
+        pos+=size;
         vec[pos]=x;
         while(pos>1) {
             pos/=2;
@@ -43,7 +43,7 @@ public:
         return max(ql,qr);
     }
     // [l,r): 求める対象の区間
-    int mx(const int& l,const int& r) {return query(l,r,1,size+1,1);}
+    int mx(const int& l,const int& r) {return query(l,r,0,size,1);}
 };
 
 // min
@@ -56,7 +56,7 @@ public:
         vec=vector<int>(size*2,INT_MAX);
     }
     void update(int pos,const int& x) {
-        pos+=size-1;
+        pos+=size;
         vec[pos]=x;
         while(pos>1) {
             pos/=2;
@@ -74,7 +74,7 @@ public:
         return min(ql,qr);
     }
     // [l,r): 求める対象の区間
-    int mi(const int& l,const int& r) {return query(l,r,1,size+1,1);}
+    int mi(const int& l,const int& r) {return query(l,r,0,size,1);}
 };
 
 // sum
@@ -87,7 +87,7 @@ public:
         vec=vector<int>(size*2,0);
     }
     void update(int pos,const int& x) {
-        pos+=size-1;
+        pos+=size;
         vec[pos]=x;
         while(pos>1) {
             pos/=2;
@@ -105,7 +105,7 @@ public:
         return ql+qr;
     }
     // [l,r): 求める対象の区間
-    int sm(const int& l,const int& r) {return query(l,r,1,size+1,1);}
+    int sm(const int& l,const int& r) {return query(l,r,0,size,1);}
 };
 
 int main(){
@@ -118,10 +118,17 @@ int main(){
     SegmentTree_max tmx(n);
     SegmentTree_min tmi(n);
     SegmentTree_sum tsm(n);
+    // 1-indexed
+    // SegmentTree_max tmx(n+1);
+    // SegmentTree_min tmi(n+1);
+    // SegmentTree_sum tsm(n+1);
     rep(i,n) {
-        tmx.update(i+1,a[i]);
-        tmi.update(i+1,a[i]);
-        tsm.update(i+1,a[i]);
+        tmx.update(i,a[i]);
+        tmi.update(i,a[i]);
+        tsm.update(i,a[i]);
+        // tmx.update(i+1,a[i]);
+        // tmi.update(i+1,a[i]);
+        // tsm.update(i+1,a[i]);
     }
     int q,l,r;
     cin >> q;
