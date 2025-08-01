@@ -40,4 +40,8 @@ public:
     bool same(const int& u, const int& v) {
         return root(u) == root(v);
     }
+
+    int size(const int& x) {
+        return siz[root(x)];
+    }
 };
