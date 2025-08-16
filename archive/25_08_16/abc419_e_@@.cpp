@@ -1,13 +1,9 @@
-// 
-
-// Ctrl + Shift + B                => Build
-// Terminal : "./a.out"            => Run
-// Terminal : "./a.out < ./in.txt" => Run
+// https://atcoder.jp/contests/abc419/tasks/abc419_e
 
 #include<bits/stdc++.h>
 using namespace std;
-// #include<atcoder/all>
-// using namespace atcoder;
+#include<atcoder/all>
+using namespace atcoder;
 
 using ll=long long;
 #define int ll
@@ -20,9 +16,9 @@ using vvi=v<vi>;
 using pii=pair<int,int>;
 const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 // const pii dir[8]={{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1}};
-// using mint=modint998244353;
+using mint=modint;
 // using mint=modint1000000007;
-// using mint=modint;
+// using mint=modint998244353;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
 #define rep1(i,n) for(int i=1;i<=(int)(n);++i)
 #define pb push_back
@@ -62,7 +58,6 @@ template<typename... Args>
 istream &operator>>(istream &is,tuple<Args...> &t){apply([&is](auto&... args){((is>>args),...);},t);return is;}
 template<typename... Args>
 ostream &operator<<(ostream &os,const tuple<Args...> &t){apply([&os](const auto&... args){int i=0;((os<<(i++?" ":"")<<args),...);},t);return os;}
-void print(){cout<<endl;}
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
 
@@ -78,50 +73,49 @@ T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    print(n,s);
-    // int mod;
-    // cin >> mod;
-    // mint::set_mod(mod);
-
+    int n,m,l;
+    cin >> n >> m >> l;
+    mint::set_mod(m);
     vi a(n);
     cin >> a;
-    print(a);
-    vvi g(n,vi(n,0));
-    cin >> g;
-    rep(i,n)print(g[i]);
+    int sm=0;
+    rep(i,l) sm+=a[i];
+    int dif=(m-(sm%m))%m;
+    v<mint> ma(n);
+    rep(i,n) ma[i]=a[i];
+    v<v<mint>> aa(l,ma);
+    rep(i,l) aa[i][i]+=dif;
+    int ans=n*m;
+    rep(i,l) {
+        int res=0;
+        int ss=0;
+        for (int j=0; j+l<n; ++j) {
+            ss+=(aa[i][j+l]-aa[i][j]).val();
+            int d=(m-(ss%m))%m;
+            // print(ss,d);
+            res+=d;
+            aa[i][j+l]+=d;
+            ss+=d;
+        }
+        chmin(ans,res);
+        // cout<<endl;
+    }
+    print(ans+dif);
+    // for (int i=0; i+l<=n; ++i) {
+    //     rep(j,l) {
+    //         s[j]+=aa[j][i+l-1];
+    //         s[j]%=m;
+    //         ad[j]+=(m-s[j])%m;
 
-    pii p;
-    cin >> p;
-    print(p);
-    v<pii> b(n);
-    // cin >> b;
-    rep(i,n)cin >> b[i];
-    // print(b);
-    rep(i,n)print(b[i]);
-
-    tuple<int,string,double> t;
-    // cin >> get<0>(t) >> get<1>(t) >> get<2>(t);
-    cin >> t;
-    // print(get<0>(t),get<1>(t),get<2>(t));
-    print(t);
-    // auto&[x,y,z]=t;
-    // cin >> x >> y >> z;
-    // print(x,y,z);
-
-    v<tuple<int,int,int>> c(n);
-    // cin >> c;
-    rep(i,n)cin >> c[i];
-    // print(c);
-    rep(i,n)print(c[i]);
-
-    double d;
-    cin >> d;
-    cout<<fixed<<setprecision(16);
-    print(d);
+    //         s[j]+=m-aa[j][i];
+    //     }
+    // }
+    // int mi=m+1,idx=-1;
+    // rep(i,n-l+1) {
+    //     if (chmin(mi,(m-b[i])%m)) idx=i;
+    // }
+    // int ans=(n+l-1)/l*mi;
+    
 
     return 0;
 }
