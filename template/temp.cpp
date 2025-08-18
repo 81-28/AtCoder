@@ -34,6 +34,13 @@ template<typename T>inline bool chmax(T& a,const T& b){if(a<b){a=b;return 1;}ret
 template<typename T>inline bool chmin(T& a,const T& b){if(a>b){a=b;return 1;}return 0;}
 #define YesNo(x) puts(x?"Yes":"No")
 
+// double pow() では大きい数の時に誤差が発生する オーバーフローに注意 剰余のときはmodint.pow()で良い
+int int_pow(int a,int b) {
+    int res=1;
+    while(b){if(b&1)res*=a;a*=a;b>>=1;}
+    return res;
+}
+
 // #define f first
 // #define s second
 // // pairの足し算

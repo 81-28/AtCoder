@@ -133,13 +133,11 @@ vector<int> primeFactors(int n) {
 
 // 素数 p に対する a^b の計算を行い、m で割った余りを返す関数
 ll ModPower(ll a, ll b, ll m) {
-    ll result = 1;
-    while (b > 0) {
-        if (b % 2 == 1) {
-            result = (result * a) % m;
-        }
-        a = (a * a) % m;
-        b /= 2;
+    ll result=1;
+    while (b>0) {
+        if(b&1) result=(result*a)%m;
+        a=(a*a)%m;
+        b>>=1;
     }
     return result;
 }
