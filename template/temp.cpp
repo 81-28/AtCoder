@@ -106,9 +106,9 @@ signed main(){
     cin >> p;
     print(p);
     v<pii> b(n);
-    // cin >> b;
+    // cin >> b; X
     rep(i,n)cin >> b[i];
-    // print(b);
+    // print(b); X
     rep(i,n)print(b[i]);
 
     tuple<int,string,double> t;
@@ -121,9 +121,9 @@ signed main(){
     // print(x,y,z);
 
     v<tuple<int,int,int>> c(n);
-    // cin >> c;
+    // cin >> c; X
     rep(i,n)cin >> c[i];
-    // print(c);
+    // print(c); X
     rep(i,n)print(c[i]);
 
     double d;

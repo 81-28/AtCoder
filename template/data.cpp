@@ -1,3 +1,13 @@
+// v[x] => v.at()
+template<typename T>
+class v:public vector<T> {
+public:
+    using vector<T>::vector;
+    T&operator[](size_t index){return this->at(index);}
+    const T&operator[](size_t index)const{return this->at(index);}
+};
+
+
 // 配列の操作
 #include <iostream>
 
