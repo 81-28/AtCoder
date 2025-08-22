@@ -159,51 +159,79 @@ ll nCr(ll n, ll r) {
     }
     return result;
 }
-// nCr を m で割った余りを計算する関数
-ll nCrModM(ll n, ll r, ll m) {
+// 効率的な nCr mod p の計算（O(r)）
+ll nCrModP(ll n, ll r, ll p) {
     if (r > n) return 0;
     if (r == 0 || r == n) return 1;
     if (r > n - r) r = n - r;
-
+    
     ll numerator = 1, denominator = 1;
-    for (int i = 1; i <= n; i++) {
-        numerator = (numerator * i) % m;
-        if (i == r || i == n - r) denominator = (denominator * numerator) % m;
+    for (ll i = 0; i < r; i++) {
+        numerator = (numerator * ((n - i) % p)) % p;
+        denominator = (denominator * (i + 1)) % p;
     }
-    ll result = 1, power = m - 2;
-    while (power > 0) {
-        if (power % 2 == 1) result = (result * denominator) % m;
-        denominator = (denominator * denominator) % m;
-        power /= 2;
-    }
-    return (numerator * result) % m;
+    
+    return (numerator * ModPower(denominator, p - 2, p)) % p;
 }
-// nCr を m で割った余りを計算する関数（m = 0 の場合は割らない）
-ll nCrModM(ll n, ll r, ll m) {
-    if (r > n) return 0;
-    if (r == 0 || r == n) return 1;
 
-    ll numerator = 1, denominator = 1;
-    for (int i = 1; i <= n; i++) {
-        numerator *= i;
-        if (i == r || i == n - r) denominator *= numerator;
-        if (m != 0) {
-            numerator %= m;
-            denominator %= m;
+// 階乗テーブルを使った高速な nCr mod p（前処理 O(n), クエリ O(1)）
+class CombinationMod {
+private:
+    vector<ll> fact, inv_fact;
+    ll mod;
+    
+public:
+    CombinationMod(int n, ll m) : mod(m) {
+        fact.resize(n + 1);
+        inv_fact.resize(n + 1);
+        
+        fact[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = (fact[i-1] * i) % mod;
+        }
+        
+        inv_fact[n] = ModPower(fact[n], mod - 2, mod);
+        for (int i = n - 1; i >= 0; i--) {
+            inv_fact[i] = (inv_fact[i+1] * (i+1)) % mod;
         }
     }
-    if (m == 0) {
-        return numerator / denominator;
-    } else {
-        ll result = 1, power = m - 2;
-        while (power > 0) {
-            if (power % 2 == 1) result = (result * denominator) % m;
-            denominator = (denominator * denominator) % m;
-            power /= 2;
-        }
-        return (numerator * result) % m;
+    
+    ll nCr(ll n, ll r) {
+        if (r > n || r < 0) return 0;
+        return (fact[n] * inv_fact[r] % mod) * inv_fact[n-r] % mod;
     }
-}
+    
+    ll nPr(ll n, ll r) {
+        if (r > n || r < 0) return 0;
+        return fact[n] * inv_fact[n-r] % mod;
+    }
+};
+
+// atcoder::modint を使った実装例
+#include <atcoder/modint>
+using mint = atcoder::modint998244353;
+
+class CombinationMint {
+private:
+    vector<mint> fact,inv_fact;
+public:
+    CombinationMint(const int& n) {
+        fact.resize(n+1);
+        inv_fact.resize(n+1);
+        fact[0]=1;
+        for(int i=1; i<=n; ++i) fact[i]=fact[i-1]*i;
+        inv_fact[n]=fact[n].inv();
+        for(int i=n-1; i>=0; --i) inv_fact[i]=inv_fact[i+1]*(i+1);
+    }
+    mint nCr(const int& n,const int& r) {
+        if(r>n||r<0) return 0;
+        return fact[n]*inv_fact[r]*inv_fact[n-r];
+    }
+    mint nPr(const int& n,const int& r) {
+        if(r>n||r<0) return 0;
+        return fact[n]*inv_fact[n-r];
+    }
+};
 
 
 // 二分探索をして、値のindexを返す関数
