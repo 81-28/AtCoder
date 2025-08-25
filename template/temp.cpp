@@ -32,7 +32,6 @@ const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 #define substring(s,l,r) s.substr(l,r-l)
 template<typename T>inline bool chmax(T& a,const T& b){if(a<b){a=b;return 1;}return 0;}
 template<typename T>inline bool chmin(T& a,const T& b){if(a>b){a=b;return 1;}return 0;}
-#define YesNo(x) puts(x?"Yes":"No")
 
 // `double pow()`では大きい数の時に誤差が発生する オーバーフローに注意 剰余のときは`modint.pow()`で良い
 int int_pow(int a,int b) {
@@ -73,6 +72,7 @@ ostream &operator<<(ostream &os,const tuple<Args...> &t){apply([&os](const auto&
 void print(){cout<<endl;}
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
+#define YesNo(x) print(x?"Yes":"No")
 
 // セグ木使おう
 template<typename T>
