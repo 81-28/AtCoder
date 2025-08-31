@@ -19,33 +19,30 @@ signed main(){
     int q;
     cin >> q;
     // {数,個数}
-    deque<pii> qu;
+    queue<pii> qu;
     while (q--) {
         int n;
         cin >> n;
         if (n==1) {
             int c,x;
             cin >> c >> x;
-            qu.push_back({x,c});
+            qu.push({x,c});
         }
         if (n==2) {
             int k;
             cin >> k;
             int ans=0;
             while (1) {
-                pii p=qu.front();
-                if (p.s>=k) {
-                    ans+=p.f*k;
-                    p.s-=k;
-                    qu.pop_front();
-                    if (p.s!=0) {
-                        qu.push_front(p);
-                    }
+                auto&[x,c]=qu.front();
+                if (c>=k) {
+                    ans+=x*k;
+                    c-=k;
+                    if (c==0) qu.pop();
                     break;
                 } else {
-                    ans+=p.f*p.s;
-                    k-=p.s;
-                    qu.pop_front();
+                    ans+=x*c;
+                    k-=c;
+                    qu.pop();
                 }
             }
             print(ans);
