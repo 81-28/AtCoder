@@ -39,7 +39,13 @@ int int_pow(int a,int b) {
     while(b){if(b&1)res*=a;a*=a;b>>=1;}
     return res;
 }
-// `double log()`も同様に誤差が発生するので、`to_string(n).size()`が良い
+// log(0)=-1
+int log2_int(int n) {
+    int i=-1;
+    for(;n>0;n>>=1)++i;
+    return i;
+}
+// `double log10()`も同様に誤差が発生するので、`to_string(n).size()`が良い
 
 // #define f first
 // #define s second
