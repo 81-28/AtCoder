@@ -28,19 +28,19 @@ const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 #define pb push_back
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
-#define uniq(v) v.erase(unique(v.begin(),v.end()),v.end()); // sort後に使用する
+#define uniq(v) v.erase(unique(v.begin(),v.end()),v.end()) // sort後に使用する
 #define substring(s,l,r) s.substr(l,r-l)
 template<typename T>inline bool chmax(T& a,const T& b){if(a<b){a=b;return 1;}return 0;}
 template<typename T>inline bool chmin(T& a,const T& b){if(a>b){a=b;return 1;}return 0;}
 
 // `double pow()`では大きい数の時に誤差が発生する オーバーフローに注意 剰余のときは`modint.pow()`で良い
 int int_pow(int a,int b) {
-    int res=1;
-    while(b){if(b&1)res*=a;a*=a;b>>=1;}
-    return res;
+    int r=1;
+    while(b){if(b&1)r*=a;a*=a;b>>=1;}
+    return r;
 }
 // log(0)=-1
-int log2_int(int n) {
+int int_log2(int n) {
     int i=-1;
     for(;n>0;n>>=1)++i;
     return i;
