@@ -109,26 +109,20 @@ signed main(){
         int ans=INT_MAX;
         // 全部0にする
         int m=idx[1].size();
-        if (m==1) {
-            int i=idx[1][0];
-            int res=min((i+1)*2-sm[0][i],(n-i)*2-sm[1][i]);
-            chmin(ans,res);
-        }
+        int res=min((idx[1][m-1]+1)*2-sm[0][idx[1][m-1]],(n-idx[1][0])*2-sm[1][idx[1][0]]);
+        chmin(ans,res);
         rep(i,m-1) {
             int j=idx[1][i],k=idx[1][i+1];
-            int res=(j+1+n-k)*2-(sm[0][j]+sm[1][k]);
+            res=(j+1+n-k)*2-(sm[0][j]+sm[1][k]);
             chmin(ans,res);
         }
         // 全部1にする
         m=idx[0].size();
-        if (m==1) {
-            int i=idx[0][0];
-            int res=min(i+1+sm[0][i],n-i+sm[1][i]);
-            chmin(ans,res);
-        }
+        res=min(idx[0][m-1]+1+sm[0][idx[0][m-1]],n-idx[0][0]+sm[1][idx[0][0]]);
+        chmin(ans,res);
         rep(i,m-1) {
             int j=idx[0][i],k=idx[0][i+1];
-            int res=(j+1+n-k)+(sm[0][j]+sm[1][k]);
+            res=(j+1+n-k)+(sm[0][j]+sm[1][k]);
             chmin(ans,res);
         }
         print(ans);
