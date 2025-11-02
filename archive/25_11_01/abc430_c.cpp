@@ -21,7 +21,7 @@ signed main(){
     int n,a,b;
     string s;
     cin >> n >> a >> b >> s;
-    vi aa,bb;
+    vi aa(1,-1),bb=aa;
     int ans=0;
     // 右端i
     rep(i,n) {
@@ -29,11 +29,8 @@ signed main(){
         if (s[i]=='a') aa.pb(i);
         else bb.pb(i);
         int as=aa.size(),bs=bb.size();
-        int ai=as-a;
-        if (ai<0) continue;
-        int bi=bs-b;
-        if (bi<0) ans+=aa[ai]+1;
-        else ans+=max(aa[ai]-bb[bi],0LL);
+        int ai=max(as-a,0LL),bi=max(bs-b,0LL);
+        ans+=max(aa[ai]-bb[bi],0LL);
     }
     print(ans);
 
