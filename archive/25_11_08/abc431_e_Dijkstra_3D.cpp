@@ -56,13 +56,14 @@ signed main(){
             auto[x,y]=pos+dir[di];
             if (!in({x,y},{h,w})) continue;
             if (pos.s!=-1 && dist>d[pos.f][pos.s][di]) continue;
+            // 直進
             if (chmin(d[x][y][di],dist+(st[x][y]!='A'))) q.push({d[x][y][di],{x,y},di});
             if (di%2) {
-                // 左右
+                // 左右→上下
                 if (chmin(d[x][y][(di+3)%4],dist+(st[x][y]!='B'))) q.push({d[x][y][(di+3)%4],{x,y},(di+3)%4});
                 if (chmin(d[x][y][(di+1)%4],dist+(st[x][y]!='C'))) q.push({d[x][y][(di+1)%4],{x,y},(di+1)%4});
             } else {
-                // 上下
+                // 上下→左右
                 if (chmin(d[x][y][(di+1)%4],dist+(st[x][y]!='B'))) q.push({d[x][y][(di+1)%4],{x,y},(di+1)%4});
                 if (chmin(d[x][y][(di+3)%4],dist+(st[x][y]!='C'))) q.push({d[x][y][(di+3)%4],{x,y},(di+3)%4});
             }
