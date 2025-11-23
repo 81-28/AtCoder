@@ -24,8 +24,8 @@ signed main(){
     cin >> n >> m;
     vi a(n);
     cin >> a;
-    // m[i][j]=右に追加する桁数がiの時、剰余がjとなる個数
-    v<map<int,int>> mp(11);
+    // mp[i][j]:右に追加する桁数がiの時、剰余がjとなる個数
+    v<unordered_map<int,int>> mp(11);
     rep(i,n) {
         int aa=a[i];
         rep1(j,10) {
