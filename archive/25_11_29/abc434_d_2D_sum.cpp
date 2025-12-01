@@ -29,14 +29,12 @@ signed main(){
         ++sm[d+1][r+1];
     }
     // 雲の分厚さが1であるマスの個数の累積和
-    vvi sm1(2002,vi(2002,0));
+    vvi sm1(2001,vi(2001,0));
     int z=0;
     rep1(i,2e3)rep1(j,2e3) {
         sm[i][j]+=sm[i][j-1]+sm[i-1][j]-sm[i-1][j-1];
         if (sm[i][j]==1) ++sm1[i][j];
         if (sm[i][j]==0) ++z;
-    }
-    rep1(i,2e3)rep1(j,2e3) {
         sm1[i][j]+=sm1[i][j-1]+sm1[i-1][j]-sm1[i-1][j-1];
     }
     for (const auto&[u,d,l,r]:t) {
