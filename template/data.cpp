@@ -18,6 +18,7 @@ int main() {
     for (int i = 0; i < 5; i++) {
         std::cout << arr[i] << " ";
     }
+    // ※ 配列の添字アクセスは O(1)
     std::cout << std::endl; // 1 2 3 4 5
 
     return 0;
@@ -35,11 +36,13 @@ int main() {
 
     // 要素の追加
     vec.push_back(6);
+    // push_back: amortized O(1)（容量が足りない場合は再割当が発生して O(n) になる）
 
     // 要素へのアクセス
     for (int i = 0; i < vec.size(); i++) {
         std::cout << vec[i] << " ";
     }
+    // vec[i] のアクセスは O(1)
     std::cout << std::endl; // 1 2 3 4 5 6
 
 
@@ -47,6 +50,7 @@ int main() {
     int rows = 3;
     int cols = 5;
     std::vector<std::vector<int>> matrix(rows, std::vector<int>(cols, 0));
+    // 初期化に O(rows * cols)
 
     // 動的にサイズを決める
     int rows = 3;
@@ -58,9 +62,11 @@ int main() {
     for (int i = 0; i < rows; ++i) {
         matrix[i].resize(cols, 0);  // 全て0で初期化
     }
+    // resize のコストは新しい要素分の初期化に依存（各行で O(cols)）
 
     // 末尾の要素を削除
     vec.pop_back();
+    // pop_back: O(1)
 
     // ベクトルが空かどうかを確認
     if (vec.empty()) {
@@ -69,26 +75,34 @@ int main() {
 
     // 3以上の最小の要素(ソート済みでないと正しい結果は得られない)
     auto it = lower_bound(vec.begin(), vec.end(), 3);
+    // lower_bound: binary search -> O(log n) （要素はソート済みである必要がある）
     // 距離(index)を求める
     std::cout << distance(vec.begin(),it) << std::endl;
+    // std::distance on random-access iterator: O(1); on other iterators: O(n)
 
     // 3番目の位置に10を挿入
     vec.insert(vec.begin() + 2, 10);
+    // insert at arbitrary position in vector: O(n) (要素を移動させるため)
 
     // 3番目の要素を削除 (インデックスは2)
     vec.erase(vec.begin() + 2);
+    // erase at arbitrary position in vector: O(n)
 
     // 値が2の要素を全て削除
     vec.erase(std::remove(vec.begin(), vec.end(), 2), vec.end());
+    // erase-remove idiom: std::remove O(n) + erase O(k) -> 全体 O(n)
 
     // 2番目から4番目の要素を削除 (インデックスは1から3)
     vec.erase(vec.begin() + 1, vec.begin() + 4);
+    // erase(range) on vector: O(n) for shifting elements after range
 
 	// 配列の重複を消す
 	vec.erase(unique(vec.begin(), vec.end()), vec.end());
+    // unique は隣接要素の比較で O(n)（事前に sort しておくと効果的）
 
     // 全ての要素を削除
     vec.clear();
+    // clear: O(n) で要素を破棄（デストラクタ呼び出しが発生する場合）
 
     return 0;
 }
@@ -106,6 +120,7 @@ int main() {
     int end = 5;
     // インデックス2から4まで
     std::vector<int> slicedVec(vec.begin() + start, vec.begin() + end);
+    // 範囲コピー: コピーする要素数 k に対して O(k)
 
     std::cout << "Sliced vector: ";
     for (int val : slicedVec) {
@@ -127,6 +142,7 @@ int main() {
 
     // ソート
     std::sort(vec.begin(), vec.end());
+    // sort: O(n log n)
 
     // ソート後の出力
     for (int i = 0; i < vec.size(); i++) {
@@ -149,12 +165,14 @@ int main() {
 
     // 検索
     auto it = std::find(vec.begin(), vec.end(), 3);
+    // std::find: linear search O(n)
     if (it != vec.end()) {
         std::cout << "Found 3 at position " << std::distance(vec.begin(), it) << std::endl;
     }
 
     // 逆順
     std::reverse(vec.begin(), vec.end());
+    // reverse: O(n)
     for (int i : vec) {
         std::cout << i << " "; // 5 4 3 2 1
     }
@@ -163,10 +181,12 @@ int main() {
     // 合計
     int sum = std::accumulate(vec.begin(), vec.end(), 0);
     long long sumLL = std::accumulate(vec.begin(), vec.end(), 0LL);
+    // accumulate: O(n)
     std::cout << "Sum: " << sum << std::endl; // Sum: 15
 
     // 最大値
     int maxElement = *std::max_element(vec.begin(), vec.end());
+    // max_element: O(n)
     std::cout << "Max element: " << maxElement << std::endl; // Max element: 5
 
     // 最大値のイテレータを取得
@@ -201,6 +221,8 @@ std::vector<std::vector<int>> concatenateHorizontally(const std::vector<std::vec
         result[i].insert(result[i].end(), vec1[i].begin(), vec1[i].end());
         result[i].insert(result[i].end(), vec2[i].begin(), vec2[i].end());
     }
+
+    // 全体コスト: 各行の連結に要する時間は各行の長さに比例するため、合計で O(total elements)
 
     return result;
 }
@@ -302,6 +324,8 @@ int main() {
     std::vector<int> vec;
     vec.reserve(10); // 容量を10に確保
 
+    // reserve は容量を確保するだけで O(1)、その後の push_back は再割当がなければ amortized O(1)
+
     for (int i = 0; i < 10; ++i) {
         vec.push_back(i);
         std::cout << "Capacity: " << vec.capacity() << ", Size: " << vec.size() << std::endl;
@@ -339,6 +363,7 @@ int main() {
     if (p1 < p2) {
         cout << "p1 is less than p2" << endl; // p1 is less than p2
     }
+    // pair の比較は定数時間 O(1)
 
     return 0;
 }
@@ -359,6 +384,8 @@ int main() {
     std::map<std::string, int> myMap;
     myMap["one"] = 1;
     myMap["two"] = 2;
+
+    // map の検索/挿入/削除は O(log n)
 
     // 要素へのアクセス
     std::cout << "one: " << myMap["one"] << std::endl; // one: 1
@@ -422,6 +449,8 @@ int main() {
     umap["apple"] = 1;
     umap["banana"] = 2;
 
+    // unordered_map の平均コストは O(1)（ハッシュ衝突で悪化する場合がある）
+
     // 要素の検索
     if (umap.find("apple") != umap.end()) {
         cout << "apple found: " << umap["apple"] << endl; // apple found: 1
@@ -459,6 +488,7 @@ int main() {
         std::cout << myStack.top() << " ";
         myStack.pop();
     }
+    // stack::push/pop/top は O(1)
     std::cout << std::endl; // 3 2 1
 
     return 0;
@@ -484,6 +514,7 @@ int main() {
         std::cout << myQueue.front() << " ";
         myQueue.pop();
     }
+    // queue::push/pop/front は O(1)
     std::cout << std::endl; // 1 2 3
 
     return 0;
@@ -509,6 +540,8 @@ int main() {
     pq.push(1);
     pq.push(3);
 
+    // priority_queue::push/pop は O(log n)
+
     // 要素の取り出し（最大値から）
     while (!pq.empty()) {
         std::cout << pq.top() << " ";
@@ -518,3 +551,183 @@ int main() {
 
     return 0;
 }
+
+
+// -----------------------------
+// 一箇所にまとめた: erase と emplace の実用例
+// -----------------------------
+// このセクションでは以下をまとめて示す:
+//  - シーケンスコンテナ(vector/list) での走査中削除パターン (it = erase(it)) と erase-remove idiom
+//  - 連想コンテナ(set/map) での erase(key)/erase(iterator)/erase(range) の使い方
+//  - emplace 系の利点 (in-place construction) と try_emplace のメリット
+//  - associative container の emplace/insert の戻り値 (pair<iterator,bool>) の活用
+
+#include <iostream>
+#include <vector>
+#include <list>
+#include <set>
+#include <map>
+#include <unordered_map>
+#include <algorithm>
+#include <string>
+
+// シーケンスコンテナでの削除パターン
+void erase_sequence_examples() {
+    std::cout << "--- erase: sequence container examples ---\n";
+
+    // vector: 走査しながら条件に合う要素を削除する安全なパターン
+    std::vector<int> v = {1,2,3,4,5,6,7};
+    for (auto it = v.begin(); it != v.end(); ) {
+        // vector::erase(it) は要素の移動が発生するため O(n)（位置に依存）
+        if ((*it) % 2 == 1) it = v.erase(it); // erase は次のイテレータを返す
+        else ++it;
+    }
+    std::cout << "vector after erase-while-iterating: ";
+    for (int x: v) std::cout << x << " "; // 2 4 6
+    std::cout << "\n";
+
+    // list: 連続する値の削除などでも同様に it = erase(it) が使える
+    std::list<int> lst = {1,2,2,3,2,4};
+    for (auto it = lst.begin(); it != lst.end(); ) {
+        // list::erase(it) は双方向連結リストのノード削除で O(1)
+        if (*it == 2) it = lst.erase(it);
+        else ++it;
+    }
+    std::cout << "list after erase-while-iterating: ";
+    for (int x: lst) std::cout << x << " "; // 1 3 4
+    std::cout << "\n";
+
+    // erase-remove idiom: 条件が単純で一括削除できる場合はこれが最も高速
+    std::vector<int> v2 = {1,2,3,2,4,2};
+    v2.erase(std::remove(v2.begin(), v2.end(), 2), v2.end());
+    // erase-remove idiom: std::remove は O(n)、erase は末尾削除で amortized O(1) 相当 -> 全体 O(n)
+    std::cout << "vector after erase-remove idiom: ";
+    for (int x: v2) std::cout << x << " "; // 1 3 4
+    std::cout << "\n\n";
+}
+
+// 連想コンテナでの erase の使い方
+void erase_associative_examples() {
+    std::cout << "--- erase: associative container examples ---\n";
+
+    std::set<int> s = {1,2,3,4,5};
+    // キーによる削除: 存在すれば削除して 1 を返す
+    // set::erase(key): 要素の検索と削除で O(log n)
+    size_t removed = s.erase(3);
+    std::cout << "removed count from set: " << removed << "\n";
+
+    // イテレータによる削除
+    auto it = s.find(4);
+    // set::erase(iterator): ノード削除で一般に amortized O(1)
+    if (it != s.end()) s.erase(it);
+
+    // 範囲削除 (例: 2 未満を削除)
+    auto first = s.begin();
+    auto last = s.lower_bound(2);
+    // erase(range): 削除する要素数 k に対して O(k)（ノード単位での削除）
+    s.erase(first, last);
+
+    std::cout << "set after erases: ";
+    for (int x: s) std::cout << x << " ";
+    std::cout << "\n";
+
+    // map の場合: erase(key) は削除した要素数を返す
+    std::map<int,std::string> mp = {{1,"a"},{2,"b"},{3,"c"}};
+    // map::erase(key): O(log n)
+    auto rc = mp.erase(2);
+    std::cout << "map removed count for key 2: " << rc << "\n";
+
+    // イテレータによる削除
+    auto itmap = mp.find(3);
+    // map::erase(iterator): ノード削除で一般に amortized O(1)
+    if (itmap != mp.end()) mp.erase(itmap);
+
+    std::cout << "map after erases: ";
+    for (auto &kv: mp) std::cout << "("<<kv.first<<","<<kv.second<<") ";
+    std::cout << "\n\n";
+
+    // イテレータ更新パターンの例: it = erase(it) を使う（C++11 以降）
+    {
+        std::cout << "iterator-update erase example (set/map):\n";
+        std::set<int> s2 = {1,2,3,4,5,6};
+        for (auto it2 = s2.begin(); it2 != s2.end(); ) {
+            if ((*it2) % 2 == 0) it2 = s2.erase(it2); // 偶数を削除
+            else ++it2;
+        }
+        std::cout << " set after erase-even: "; for (int x: s2) std::cout << x << " "; std::cout << "\n";
+
+        std::map<int,std::string> mp2 = {{1,"a"},{2,"b"},{3,"c"},{4,"d"}};
+        for (auto it2 = mp2.begin(); it2 != mp2.end(); ) {
+            if (it2->first % 2 == 0) it2 = mp2.erase(it2); // map::erase(iterator) は次の iterator を返す
+            else ++it2;
+        }
+        std::cout << " map after erase-even-keys: "; for (auto &kv: mp2) std::cout << "("<<kv.first<<","<<kv.second<<") "; std::cout << "\n\n";
+    }
+
+    // 注意: map/set の走査中に削除する場合は ++it の順序に注意する（イテレータ無効化に注意）
+}
+
+// emplace 系の利点と返り値の使い方をまとめる
+void emplace_examples() {
+    std::cout << "--- emplace examples ---\n";
+
+    // vector::emplace_back と push_back の違い
+    std::vector<std::pair<int,std::string>> vp;
+    vp.emplace_back(1, "one"); // in-place construction
+    vp.push_back(std::make_pair(2, "two")); // 一時オブジェクトが作られる可能性あり
+    std::cout << "vector of pairs: ";
+    for (auto &p: vp) std::cout << "("<<p.first<<","<<p.second<<") ";
+    std::cout << "\n";
+
+    // map::emplace と try_emplace
+    std::map<int,std::string> mp;
+    auto r1 = mp.emplace(1, "a");
+    if (r1.second) std::cout << "inserted key 1 via emplace\n";
+
+    // try_emplace は既存キーの場合に mapped_type の構築を回避
+    mp.try_emplace(2, "b");
+    mp.try_emplace(1, "ignored"); // 何もしない
+    std::cout << "map contents: ";
+    for (auto &kv: mp) std::cout << "("<<kv.first<<","<<kv.second<<") ";
+    std::cout << "\n";
+
+    // unordered_map::try_emplace の利点: 無駄な value 構築を避ける
+    std::unordered_map<std::string, std::vector<int>> um;
+    um.try_emplace("key", 5); // vector(5) を in-place 構築
+    // emplace/insert の戻り値 (associative): pair<iterator,bool>
+    std::map<int,std::vector<int>> mpv;
+    auto res = mpv.emplace(std::piecewise_construct,
+                           std::forward_as_tuple(1),
+                           std::forward_as_tuple());
+    if (res.second) std::cout << "mpv inserted key 1\n";
+
+    // emplace の戻り値を活用する例
+    // - .second が true なら挿入成功、false なら既存要素の iterator が返る
+    auto [it_ins, ok_ins] = mp.emplace(10, "init");
+    if (ok_ins) std::cout << "mp inserted key 10\n";
+    else it_ins->second += "_updated";
+
+    // emplace_hint: 挿入位置のヒントを与えて高速化できる場合がある
+    auto hintIt = mp.emplace_hint(mp.end(), 20, "hinted");
+    std::cout << "emplace_hint inserted key=" << hintIt->first << "\n";
+
+    // try_emplace の実例 (重い構築を避ける)
+    std::map<int,std::vector<int>> heavy;
+    auto heavy_res = heavy.try_emplace(2, 1000000);
+    if (heavy_res.second) std::cout << "constructed heavy value for key 2\n";
+    auto heavy_res2 = heavy.try_emplace(2, 1000000);
+    if (!heavy_res2.second) std::cout << "did not construct heavy value for key 2 again\n";
+
+    // emplace の返り値から iterator を取り出して要素を参照/更新する例
+    // emplace の計算量:
+    //  - ordered associative (map/set): O(log n) 比較 + 要素構築コスト
+    //  - unordered associative: 平均 O(1) + 要素構築コスト
+    auto [it, inserted] = mpv.emplace(3, std::vector<int>{1,2,3});
+    if (!inserted) {
+        it->second.push_back(99);
+    }
+    std::cout << "mpv size: " << mpv.size() << "\n\n";
+}
+
+
+

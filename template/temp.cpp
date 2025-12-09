@@ -80,7 +80,6 @@ template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
 #define YesNo(x) print(x?"Yes":"No")
 
-// セグ木使おう
 template<typename T>
 auto sum(const v<T>& v){return accumulate(v.begin(),v.end(),T{});}
 template<typename T>
@@ -88,6 +87,8 @@ T max(const v<T>& v){return *max_element(v.begin(),v.end());}
 template<typename T>
 T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 
+// 区間のクエリが必要ならセグ木使う
+// 値の範囲が大きい→座標圧縮で解けないかを考える
 
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
