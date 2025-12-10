@@ -61,7 +61,39 @@ int main() {
     auto it3 = mp.lower_bound(3);
     if (it3 != mp.end()) cout << "map lower_bound 3 -> ("<<it3->first<<","<<it3->second<<")\n";
 
-    // --- 5) まとめ / よくある落とし穴 ---
+    // --- 5) tuple の扱い ---
+    // tuple は pair と同様に辞書式比較 (lexicographical) を持つ。要素数が多くても
+    // 先頭要素から順に比較される点は pair と同じである。
+    vector<tuple<int,int,int>> vt = {{4,450,1},{1,100,2},{4,400,3},{7,700,4},{2,200,5}};
+    sort(vt.begin(), vt.end()); // tuple も lexicographical に比較される
+    cout << "[lexicographical sort (tuple)] "; for (auto &t: vt) cout << "("<<get<0>(t)<<","<<get<1>(t)<<","<<get<2>(t)<<") "; cout << '\n';
+
+    // first >= 4 の最初の要素を得るには sentinel を使う
+    auto it_t = lower_bound(vt.begin(), vt.end(), make_tuple(4, INT_MIN, INT_MIN));
+    if (it_t != vt.end()) cout << "lower_bound for first>=4 (tuple) -> ("<<get<0>(*it_t)<<","<<get<1>(*it_t)<<","<<get<2>(*it_t)<<")\n";
+
+    // equal_range で first==4 の範囲を取得
+    auto er_t = equal_range(vt.begin(), vt.end(), make_tuple(4, INT_MIN, INT_MIN));
+    cout << "equal_range for first==4 (tuple via sentinels):\n";
+    for (auto itx = er_t.first; itx != er_t.second; ++itx) cout << "  ("<<get<0>(*itx)<<","<<get<1>(*itx)<<","<<get<2>(*itx)<<")\n";
+
+    // binary_search は tuple 全体の一致を見る点に注意
+    cout << "binary_search for (2,200,5): " << (binary_search(vt.begin(), vt.end(), make_tuple(2,200,5))?"yes":"no") << '\n';
+
+    // first のみで扱いたい時はカスタム comparator を使う
+    vector<tuple<int,int,int>> by_first_t = vt; // コピー
+    stable_sort(by_first_t.begin(), by_first_t.end(), [](const auto& a, const auto& b){ return get<0>(a) < get<0>(b); });
+    cout << "[stable_sort by first (tuple)] "; for (auto &t: by_first_t) cout << "("<<get<0>(t)<<","<<get<1>(t)<<","<<get<2>(t)<<") "; cout << '\n';
+
+    auto cmp_tuple_first = [](const tuple<int,int,int>& a, const tuple<int,int,int>& b){ return get<0>(a) < get<0>(b); };
+    auto lo_t = lower_bound(by_first_t.begin(), by_first_t.end(), make_tuple(4,0,0), cmp_tuple_first);
+    auto hi_t = upper_bound(by_first_t.begin(), by_first_t.end(), make_tuple(4,0,0), cmp_tuple_first);
+    cout << "range for first==4 using first-only comparator (tuple):\n";
+    for (auto itx = lo_t; itx != hi_t; ++itx) cout << "  ("<<get<0>(*itx)<<","<<get<1>(*itx)<<","<<get<2>(*itx)<<")\n";
+
+    // 注意: pair の場合と同様、ソートと検索で異なる comparator を混在させるのは未定義挙動になる
+
+    // --- 6) まとめ / よくある落とし穴 ---
     // - pair の second はデフォルトで比較に影響する (同じ first の順序決定に使われる)
     // - first のみで検索したければ sentinel を使うか、ソートと検索で同じ comparator を使う
     // - stable_sort を使うと second の元の相対順序が保たれるため、second の順序が重要な場合に有用
