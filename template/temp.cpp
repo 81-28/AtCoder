@@ -17,6 +17,8 @@ template<typename T>
 using v=vector<T>;
 using vi=v<int>;
 using vvi=v<vi>;
+using vb=v<bool>;
+using vvb=v<vb>;
 using pii=pair<int,int>;
 const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 // const pii dir[8]={{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1}};
