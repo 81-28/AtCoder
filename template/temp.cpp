@@ -22,6 +22,8 @@ using vvb=v<vb>;
 using pii=pair<int,int>;
 const pii dir[4]={{-1,0},{0,-1},{1,0},{0,1}};
 // const pii dir[8]={{-1,0},{-1,-1},{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1}};
+inline bool OutOfGrid(const pii& p,const pii& rng){return p.first<0||rng.first<=p.first||p.second<0||rng.second<=p.second;}
+inline int ManhattanDist(const pii& a,const pii& b){return abs(a.first-b.first)+abs(a.second-b.second);}
 // using mint=modint998244353;
 // using mint=modint1000000007;
 // using mint=modint;
