@@ -1,3 +1,6 @@
+// https://atcoder.github.io/ac-library/production/document_ja/segtree.html
+// https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html
+
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/segtree>
@@ -10,7 +13,7 @@ using ll=long long;
 constexpr int INF = std::numeric_limits<int>::max()/4; // 約2e18
 
 
-// テンプレ
+// 汎用テンプレ
 using S=int;
 S op(S a,S b){return S(a+b);}
 S e(){return S();}
@@ -27,11 +30,11 @@ F id(){return ID;}
 // segtree (max/min/sum)
 using S_max = int;
 S_max op_max(S_max a, S_max b){ return max(a,b); }
-S_max e_max(){ return LLONG_MIN/4; }
+S_max e_max(){ return -INF; }
 
 using S_min = int;
 S_min op_min(S_min a, S_min b){ return min(a,b); }
-S_min e_min(){ return LLONG_MAX/4; }
+S_min e_min(){ return INF; }
 
 // 注: sum 演算はオーバーフローしうるので入力範囲に注意
 using S_sum = int;
@@ -47,7 +50,7 @@ S_pair op_pair_max(S_pair a, S_pair b){
     if(a.first != b.first) return (a.first > b.first) ? a : b;
     return (a.second < b.second) ? a : b;
 }
-S_pair e_pair_max(){ return {LLONG_MIN/4, LLONG_MAX/4}; }
+S_pair e_pair_max(){ return {-INF, INF}; }
 
 
 

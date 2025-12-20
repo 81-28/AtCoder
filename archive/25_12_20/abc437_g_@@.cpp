@@ -1,8 +1,4 @@
-// 
-
-// Ctrl + Shift + B                => Build
-// Terminal : "./a.out"            => Run
-// Terminal : "./a.out < ./in.txt" => Run
+// https://atcoder.jp/contests/abc437/tasks/abc437_g
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -13,7 +9,6 @@ using ll=long long;
 #define int ll
 using ull=unsigned long long;
 using ld=long double;
-constexpr int INF=numeric_limits<int>::max()/4;
 template<typename T>
 using v=vector<T>;
 using vi=v<int>;
@@ -95,53 +90,34 @@ T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 // 区間のクエリが必要ならセグ木使う
 // 値の範囲が大きい→座標圧縮で解けないかを考える
 
+unordered_map<char,int> color={
+    {'R',0},
+    {'G',1},
+    {'B',2}
+};
+
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    print(n,s);
-    // int mod;
-    // cin >> mod;
-    // mint::set_mod(mod);
-
-    vi a(n);
-    cin >> a;
-    print(a);
-    vvi g(n,vi(n,0));
-    cin >> g;
-    rep(i,n)print(g[i]);
-
-    pii p;
-    cin >> p;
-    print(p);
-    v<pii> b(n);
-    // cin >> b; X
-    rep(i,n)cin >> b[i];
-    // print(b); X
-    rep(i,n)print(b[i]);
-
-    tuple<int,string,double> t;
-    // cin >> get<0>(t) >> get<1>(t) >> get<2>(t);
+    int t;
     cin >> t;
-    // print(get<0>(t),get<1>(t),get<2>(t));
-    print(t);
-    // auto&[x,y,z]=t;
-    // cin >> x >> y >> z;
-    // print(x,y,z);
+    while (t--) {
+        int n;
+        string s;
+        cin >> n >> s;
+        vvi g(n);
+        map<pii,int> idx;
+        rep1(i,n-1) {
+            int u,v;
+            cin >> u >> v;
+            --u,--v;
+            g[u].pb(v),g[v].pb(u);
+            idx[{u,v}]=idx[{v,u}]=i;
+        }
+        vi c(n);
+        rep(i,n) c[i]=color[s[i]];
+    }
 
-    v<tuple<int,int,int>> c(n);
-    // cin >> c; X
-    rep(i,n)cin >> c[i];
-    // print(c); X
-    rep(i,n)print(c[i]);
-
-    double d;
-    cin >> d;
-    cout<<fixed<<setprecision(16);
-    print(d);
 
     return 0;
 }
