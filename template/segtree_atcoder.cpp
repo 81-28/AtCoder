@@ -15,7 +15,14 @@ constexpr int INF = std::numeric_limits<int>::max()/4; // 約2e18
 
 // 汎用テンプレ
 using S=int;
+// struct S{
+//     int mx,mi;
+//     S(int x,int y) {mx=x,mi=y;}
+//     S(int x) {mx=mi=x;}
+//     S(){mx=-INF,mi=INF;}
+// };
 S op(S a,S b){return S(a+b);}
+// S op(S a,S b){return S(max(a.mx,b.mx),min(a.mi,b.mi));}
 S e(){return S();}
 
 using F=int;
