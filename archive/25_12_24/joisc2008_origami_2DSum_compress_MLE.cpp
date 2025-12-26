@@ -4,6 +4,8 @@
 using namespace std;
 
 using ll=long long;
+// メモリ節約のため
+// #define int ll
 template<typename T>
 using v=vector<T>;
 using vi=v<int>;

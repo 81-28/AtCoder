@@ -19,6 +19,7 @@ signed main(){
     while (n--) {
         int p,q,r,s;
         cin >> p >> q >> r >> s;
+        // 矩形が狭いので、実際に重ねる
         for (int i=p; i<=r; ++i)for(int j=q; j<=s; ++j) {
             ++m[i][j];
             if (chmax(mx,m[i][j])) ans=1;

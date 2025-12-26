@@ -27,7 +27,9 @@ signed main(){
     vi cnt(26,0);
     rep(i,n) ++cnt[s[i]-'A'];
     int ans=1;
+    // 最初のi文字一致
     rep(i,n-1) {
+        // s[i]より前をカウント
         rep(c,s[i]-'A') {
             if (!cnt[c]) continue;
             int denom=1;
@@ -36,6 +38,7 @@ signed main(){
         }
         --cnt[s[i]-'A'];
     }
+    // 自分より前の個数+1(初期値)
     print(ans);
 
     return 0;

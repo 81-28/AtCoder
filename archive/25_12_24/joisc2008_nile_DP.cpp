@@ -27,13 +27,14 @@ signed main(){
     cin >> n >> d;
     vvi p(d,vi(n));
     cin >> p;
-    // dp[i][j]:店舗iでj+1日連続で購入した場合の最小金額
+    // dp[j][k]:店舗jでk+1日連続で購入した場合の最小金額
     vvi dp(n,vi(3,INF));
     // 現在の最小値
     int ans=0;
     rep(i,d) {
         vvi dpp(n,vi(3,INF));
         int mi=INF;
+        // i+1日目で店舗jで購入する
         rep(j,n) {
             dpp[j][0]=ans+p[i][j];
             chmin(dpp[j][1],dp[j][0]+p[i][j]*9/10);

@@ -28,6 +28,7 @@ signed main(){
     p.pb(0);
     sort(all(p));
     uniq(p);
+    // p(0を追加)の内2個を選んで獲得できる点数全パターン
     vi a;
     n=p.size();
     rep(i,n)for(int j=i; j<n; ++j) a.pb(p[i]+p[j]);
@@ -35,6 +36,7 @@ signed main(){
     uniq(a);
     n=a.size();
     int ans=0;
+    // 2+2個で合計点がm以下の最大値
     rep(i,n) {
         auto it=upper_bound(all(a),m-a[i]);
         if (it==a.begin()) break;
