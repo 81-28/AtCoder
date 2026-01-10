@@ -9,7 +9,6 @@ template<typename T>
 using v=vector<T>;
 using mint=modint998244353;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
-#define rep1(i,n) for(int i=1;i<=(int)(n);++i)
 
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
@@ -21,20 +20,21 @@ signed main(){
     string s;
     cin >> s;
     int n=s.size();
-    // dp[i]:深さiであるパターン数
-    v<mint> dp(n+1,0);
-    dp[0]=1;
+    // dp[i][j]:位置iで深さjであるパターン数
+    v<unordered_map<int,mint>> dp(n+1);
+    dp[0][0]=1;
     rep(i,n) {
-        v<mint> dpn(n+1,0);
         if (s[i]!=')') {
-            rep(j,n) dpn[j+1]+=dp[j];
+            for (auto[d,p]:dp[i]) dp[i+1][d+1]+=p;
         }
         if (s[i]!='(') {
-            rep1(j,n) dpn[j-1]+=dp[j];
+            for (auto[d,p]:dp[i]) {
+                if (d-1<0) continue;
+                dp[i+1][d-1]+=p;
+            }
         }
-        dp=dpn;
     }
-    print(dp[0].val());
+    print(dp[n][0].val());
 
     return 0;
 }
