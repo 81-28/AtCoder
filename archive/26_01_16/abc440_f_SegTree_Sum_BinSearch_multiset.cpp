@@ -61,15 +61,15 @@ signed main(){
         sm.set(a,sm.get(a)+a);
         ans+=a;
 
-        // 2である数だけスコアを倍にできる
+        // 2の個数だけスコアを倍にできる
         // 倍にするスコアは大きい順に貪欲に採用
         // 採用したものが全て2であると、ループになってしまうので、2の最小の代わりに1の最大を採用
         // 1が無い場合も考慮する必要あり
         int cnt0=s[0].size(),cnt1=s[1].size();
-        bool add0=0;
+        bool add=0;
         if ((cnt0 && cnt1 && *s[0].rbegin()<*s[1].begin()) || !cnt0) {
             --cnt1;
-            add0=1;
+            add=1;
         }
         // [l,r) : 上から見た個数の和が、rでcnt1未満,lでcnt1以上となる様に二分探索
         int l=0,r=mx;
@@ -81,7 +81,7 @@ signed main(){
         }
         int cntr=cnt.prod(r,mx);
         int sm1=sm.prod(r,mx)+l*(cnt1-cntr);
-        if (add0 && cnt0) sm1+=*s[0].rbegin();
+        if (add && cnt0) sm1+=*s[0].rbegin();
         print(ans+sm1);
     }
 
