@@ -14,7 +14,7 @@ using ll=long long;
 using ull=unsigned long long;
 using ld=long double;
 constexpr int INF=numeric_limits<int>::max()/4;
-constexpr ld PI=acos(-1);
+const ld PI=acos(-1);
 template<typename T>
 using v=vector<T>;
 using vi=v<int>;
