@@ -104,30 +104,81 @@ ll lcm(const ll& a, const ll& b) {
 }
 
 // 素数判定する関数
+// 計算量: O(√n)
 bool isPrime(const int& n) {
-    if (n <= 1) return false;
-    else if (n <= 3) return true;
-    else if (!(n%2&&n%3)) return false;
-    for (int i=5;i*i<=n;i+=6) if (!(n%i&&n%(i+2))) return false;
-    return true;
+    if(n<=1)return 0;
+    else if(n<=3)return 1;
+    else if(!(n%2&&n%3))return 0;
+    for (int i=5;i*i<=n;i+=6)if(!(n%i&&n%(i+2)))return 0;
+    return 1;
 }
-// 素因数分解する関数
+// 素因数分解する関数（2,3 を処理した後 6k±1 を試す）
+// 計算量: O(√n/ log n) に近い
 vector<int> primeFactors(int n) {
     vector<int> factors;
-    if (n < 2 || isPrime(n)) {
-        factors.push_back(n);
-    } else {
-        int divisor = 2;
-        while (n >= 2) {
-            if (n % divisor == 0) {
-                factors.push_back(divisor);
-                n /= divisor;
-            } else {
-                divisor++;
-            }
+    if (n<=1) return factors;
+    while ((n&1) == 0) {
+        factors.push_back(2);
+        n >>= 1;
+    }
+    while (n%3 == 0) {
+        factors.push_back(3);
+        n /= 3;
+    }
+    for (int i=5; (ll)i*i <= n; i+=6) {
+        while (n%i == 0) {
+            factors.push_back(i);
+            n /= i;
+        }
+        int j = i+2;
+        while (n%j == 0) {
+            factors.push_back(j);
+            n /= j;
         }
     }
+    if (n>1) factors.push_back(n);
     return factors;
+}
+// 素因数とその冪を返す関数
+// 計算量: O(√n/ log n) に近い
+// map<int,int> primeFactors(int n) {
+//     map<int,int> res;
+//     if (n<=1) return res;
+//     while ((n&1) == 0) { ++res[2]; n >>= 1; }
+//     while (n%3 == 0) { ++res[3]; n /= 3; }
+//     for (int i=5; (ll)i*i <= n; i+=6) {
+//         while (n%i == 0) { ++res[i]; n /= i; }
+//         int j = i+2;
+//         while (n%j == 0) { ++res[j]; n /= j; }
+//     }
+//     if (n>1) ++res[n];
+//     return res;
+// }
+
+// n 以下の素数を全て列挙して返す関数（線形篩: Euler sieve）
+// 計算量: 時間: O(n), 空間: O(n)
+vector<int> primes(int n) {
+    if (n < 2) return {};
+    vector<int> res;
+    int approx = 1;
+    if (n > 5) approx = (int)(n / log((double)n));
+    if (approx < 1) approx = 1;
+    res.reserve(approx + 4);
+
+    vector<int> lp(n+1, 0);
+    for (int i = 2; i <= n; ++i) {
+        if (lp[i] == 0) {
+            lp[i] = i;
+            res.push_back(i);
+        }
+        for (int p : res) {
+            long long x = 1LL * p * i;
+            if (x > n) break;
+            lp[(int)x] = p;
+            if (p == lp[i]) break;
+        }
+    }
+    return res;
 }
 
 
