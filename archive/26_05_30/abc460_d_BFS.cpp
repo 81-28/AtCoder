@@ -31,45 +31,43 @@ signed main(){
     cin >> h >> w;
     v<string> st(h);
     cin >> st;
-    vvi b(h,vi(w,-INF));
+    // INF:未確定
+    vvi b(h,vi(w,INF));
     queue<pii> q;
     rep(i,h)rep(j,w) {
-        bool b0=st[i][j]=='#';
         pii pos={i,j};
-        int cnt=0;
-        int al=0;
+        // '#'の個数,周りのマス数
+        int cnt=0,al=0;
         rep(k,8) {
             pii nxt=pos+dir[k];
             if (OutOfGrid(nxt,{h,w})) continue;
             ++al;
             cnt+=st[nxt.f][nxt.s]=='#';
         }
-        if (b0) {
-            if (cnt!=al) {
-                b[i][j]=0;
-                q.push({i,j});
-            }
-        } else {
-            if (cnt!=0) {
-                b[i][j]=1;
-                q.push({i,j});
-            }
+        bool b0=st[i][j]=='#';
+        // 周囲に自身と異なる色が1つでもあれば、点滅が確定する
+        if (cnt!=al*b0) {
+            b[i][j]=!b0;
+            q.push({i,j});
         }
+        // 周囲が全て自身と同じ色だったら、確定しない
+        // その場合、1手後からは白になり、周囲に初めて黒が来た次の手で黒となる
     }
+    // 確定を伝播させる
     while (!q.empty()) {
         pii pos=q.front();
-        int a=b[pos.f][pos.s];
         q.pop();
+        bool bb=b[pos.f][pos.s];
         rep(k,8) {
             pii nxt=pos+dir[k];
             if (OutOfGrid(nxt,{h,w})) continue;
-            if (b[nxt.f][nxt.s]!=-INF) continue;
-            b[nxt.f][nxt.s]=a+1;
+            if (b[nxt.f][nxt.s]!=INF) continue;
+            b[nxt.f][nxt.s]=!bb;
             q.push(nxt);
         }
     }
     rep(i,h) {
-        rep(j,w) cout<<((b[i][j]&1)?'.':'#');
+        rep(j,w) cout<<(b[i][j]?'.':'#');
         cout<<endl;
     }
 
