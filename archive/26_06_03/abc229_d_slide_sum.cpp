@@ -23,7 +23,7 @@ signed main(){
     // sm[i]:i番目までの'.'の個数
     vi sm(n+1,0);
     rep(i,n) sm[i+1]=sm[i]+(s[i]=='.');
-    int r=1,ans=0;
+    int r=0,ans=0;
     rep(l,n) {
         while (r<n && sm[r+1]-sm[l]<=k) ++r;
         chmax(ans,r-l);
