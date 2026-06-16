@@ -112,7 +112,7 @@ F_add_max composition_add_max(F_add_max f, F_add_max g){ return f + g; }
 F_add_max id_add_max(){ return 0; }
 
 // 区間加算・区間和取得
-// S_add_sum: 要素は (value, size)
+// S_add_sum: 要素は (value, size) {合計,幅}
 // op_add_sum: 2つのセグメントを結合して和とサイズを返す
 // mapping_add_sum: 区間に加算 f を適用 -> value += f * size
 //   ※ 注意: f * size の積はオーバーフローする可能性があります。中間を __int128 で扱うことを推奨します。
