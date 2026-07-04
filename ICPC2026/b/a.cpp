@@ -10,7 +10,7 @@ using namespace std;
 // using namespace atcoder;
 
 using ll=long long;
-// #define int ll
+#define int ll
 using ull=unsigned long long;
 using ld=long double;
 constexpr int INF=numeric_limits<int>::max()/4;
@@ -105,20 +105,18 @@ signed main(){
     cout<<fixed<<setprecision(16);
 
     for(;;) {
-        int N;
-        cin >> N;
-        if(!N) return 0;
-        vector<int> A(N);
-        rep(i,N)cin>>A[i];
-        vector<int> order = {3,4,5,6,7,8,9,10,11,12,13,1,2};
-        int idx = -1;
-        rep(i,N){
-            rep(j,13){
-                if(order[j]==A[i]) chmax(idx,j);
-            }
+        int n,d;
+        cin >> n >> d;
+        if(!n) return 0;
+        vi x(n);
+        cin >> x;
+        int last=-INF,ans=0;
+        rep(i,n) {
+            if (x[i]<=last+d) continue;
+            ++ans;
+            last=x[i]+d;
         }
-        cout<<order[idx]<<endl;
-        
+        print(ans);
     }
 
 

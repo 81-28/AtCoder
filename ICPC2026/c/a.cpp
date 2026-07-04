@@ -10,7 +10,7 @@ using namespace std;
 // using namespace atcoder;
 
 using ll=long long;
-// #define int ll
+#define int ll
 using ull=unsigned long long;
 using ld=long double;
 constexpr int INF=numeric_limits<int>::max()/4;
@@ -105,20 +105,37 @@ signed main(){
     cout<<fixed<<setprecision(16);
 
     for(;;) {
-        int N;
-        cin >> N;
-        if(!N) return 0;
-        vector<int> A(N);
-        rep(i,N)cin>>A[i];
-        vector<int> order = {3,4,5,6,7,8,9,10,11,12,13,1,2};
-        int idx = -1;
-        rep(i,N){
-            rep(j,13){
-                if(order[j]==A[i]) chmax(idx,j);
+        int n;
+        cin >> n;
+        if(!n) return 0;
+        vector<int> d(n);
+        cin>>d;
+        ll res = 0;
+        vector<vector<int>> grid(n,vector<int>(1010,1));
+        rep(i,n){
+            rep(j,d[i]){
+                grid[i][j]=0;
             }
         }
-        cout<<order[idx]<<endl;
-        
+        //左端
+        rep(i,d[0]){
+            //ぶつかるまで右に
+            rep(j,n){
+                if(grid[j][i]==1)break;
+                grid[j][i]=1;
+            }
+        }
+
+        rep(i,d.back()){
+            //ぶつかるまで左に
+            for(int j = n-1;j>=0;j--){
+                if(grid[j][i]==1)break;
+                grid[j][i]=1;
+            }
+        }
+        rep(i,n)rep(j,1010)if(grid[i][j]==0)res++;
+        cout<<res<<endl;
+
     }
 
 

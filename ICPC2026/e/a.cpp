@@ -10,7 +10,7 @@ using namespace std;
 // using namespace atcoder;
 
 using ll=long long;
-// #define int ll
+#define int ll
 using ull=unsigned long long;
 using ld=long double;
 constexpr int INF=numeric_limits<int>::max()/4;
@@ -105,20 +105,42 @@ signed main(){
     cout<<fixed<<setprecision(16);
 
     for(;;) {
-        int N;
-        cin >> N;
-        if(!N) return 0;
-        vector<int> A(N);
-        rep(i,N)cin>>A[i];
-        vector<int> order = {3,4,5,6,7,8,9,10,11,12,13,1,2};
-        int idx = -1;
-        rep(i,N){
-            rep(j,13){
-                if(order[j]==A[i]) chmax(idx,j);
-            }
+        int n;
+        cin >> n;
+        if(!n) return 0;
+        v<tuple<int,int,int>> p(n);
+        vector g(2,v<pii>());
+        int gem=0;
+        int sm=0;
+        rep(i,n) {
+            auto&[a,b,j]=p[i];
+            cin >> a >> b;
+            j=i;
+            sm+=a;
+            gem+=b;
+            g[b>0].pb({a,i});
         }
-        cout<<order[idx]<<endl;
+        if (gem==0) {
+            print(sm);
+            continue;
+        }
+        rep(i,2) sort(all(g[i]));
+        if (gem>=n) {
+            print(g[1].begin()->first);
+            continue;
+        }
+        auto[ans,idx]=*g[1].begin();
+        sort(all(p));
+        int k=0;
+        rep(i,n) {
+            auto[a,b,j]=p[i];
+            if (idx==j) continue;
+            if (++k>n-gem-1) break;
+            ans+=a;
+        }
+        print(ans);
         
+
     }
 
 

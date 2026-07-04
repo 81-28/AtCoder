@@ -10,7 +10,7 @@ using namespace std;
 // using namespace atcoder;
 
 using ll=long long;
-// #define int ll
+#define int ll
 using ull=unsigned long long;
 using ld=long double;
 constexpr int INF=numeric_limits<int>::max()/4;
@@ -96,29 +96,30 @@ T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 // 区間のクエリが必要ならセグ木使う
 // 値の範囲が大きい→座標圧縮で解けないかを考える
 
-# pragma GCC target("avx2")
-# pragma GCC optimize("O3")
-# pragma GCC optimize("unroll-loops")
-
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
     cout<<fixed<<setprecision(16);
 
     for(;;) {
-        int N;
-        cin >> N;
-        if(!N) return 0;
-        vector<int> A(N);
-        rep(i,N)cin>>A[i];
-        vector<int> order = {3,4,5,6,7,8,9,10,11,12,13,1,2};
-        int idx = -1;
-        rep(i,N){
-            rep(j,13){
-                if(order[j]==A[i]) chmax(idx,j);
+        int n;
+        cin >> n;
+        if(!n) return 0;
+
+        int max = 0;
+        int a = 0;
+        for (size_t i = 0; i < n; i++)
+        {
+            /* code */
+            cin >> a;
+            if(max < a){
+                max = a;
             }
+
         }
-        cout<<order[idx]<<endl;
+
+        print(max);
         
+
     }
 
 

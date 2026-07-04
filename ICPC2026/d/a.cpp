@@ -10,7 +10,7 @@ using namespace std;
 // using namespace atcoder;
 
 using ll=long long;
-// #define int ll
+#define int ll
 using ull=unsigned long long;
 using ld=long double;
 constexpr int INF=numeric_limits<int>::max()/4;
@@ -105,20 +105,36 @@ signed main(){
     cout<<fixed<<setprecision(16);
 
     for(;;) {
-        int N;
-        cin >> N;
-        if(!N) return 0;
-        vector<int> A(N);
-        rep(i,N)cin>>A[i];
-        vector<int> order = {3,4,5,6,7,8,9,10,11,12,13,1,2};
-        int idx = -1;
-        rep(i,N){
-            rep(j,13){
-                if(order[j]==A[i]) chmax(idx,j);
-            }
+        ll s,k;
+        cin >> s>>k;
+        if(!s) return 0;
+        if(k==1){
+            cout<<s<<endl;
+            continue;
         }
-        cout<<order[idx]<<endl;
-        
+        if(k>s*s+1){
+            if((k-s*s)%2==1)cout<<(k-(s*s+2))/(2*s)+1+s<<endl;
+            else cout<<(((k-(s*s))%(2*s+1))/2)<<endl;
+        }else{
+            ll ok = -1,  ng = s+1;
+            while((abs(ok-ng)!=1)){
+                ll mid = (ok+ng)/2;
+                if((2*mid*s-mid*mid+1)<=k)ok=mid;
+                else ng=mid;
+            }
+            ll i = ok;
+           // cout<<"i"<<i<<endl;
+            if(2*i*s-i*i+1==k) cout<<s<<endl;
+            else {
+                if((k-(2*i*s+i*i+1))%2==1){
+                    cout<<((k-(2*i*s-i*i+1)-1)%(2*s-2-2*i))/2+1+i<<endl;
+                }else{
+                    cout<<i+1<<endl;
+                }
+            }
+
+        }
+
     }
 
 
