@@ -25,8 +25,8 @@ signed main(){
             ++r;
         } else {
             ++l;
-            ans+=max(0,r-l-1);
             if (l==r) ++r;
+            ans+=r-l-1;
         }
     }
     ans+=(n-l)*(n-l-1)/2;
