@@ -3,15 +3,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define rep(i,n) for(int i=0;i<(int)(n);++i)
-
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
 
 
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-    cout<<fixed<<setprecision(16);
 
     int t;
     cin >> t;
@@ -20,12 +17,11 @@ signed main(){
         cin >> n;
         map<int,int> m;
         int cmb=0;
-        rep(i,n) {
+        while (n--) {
             int a;
             cin >> a;
-            if (a) {
-                ++cmb;
-            } else {
+            if (a) ++cmb;
+            else {
                 if (cmb) ++m[cmb];
                 cmb=0;
             }
