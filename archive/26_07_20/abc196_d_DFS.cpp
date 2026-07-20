@@ -20,24 +20,14 @@ int dfs(int n,int a,int b) {
     if (g[i][j]) return dfs(n+1,a,b);
     int res=0;
     if (a) {
-        g[i][j]=1;
         if (i+1<h) {
             g[i+1][j]=1;
             res+=dfs(n+1,a-1,b);
             g[i+1][j]=0;
         }
-        if (j+1<w && !g[i][j+1]) {
-            g[i][j+1]=1;
-            res+=dfs(n+1,a-1,b);
-            g[i][j+1]=0;
-        }
-        g[i][j]=0;
+        if (j+1<w && !g[i][j+1]) res+=dfs(n+2,a-1,b);
     }
-    if (b) {
-        g[i][j]=1;
-        res+=dfs(n+1,a,b-1);
-        g[i][j]=0;
-    }
+    if (b) res+=dfs(n+1,a,b-1);
     return res;
 }
 
