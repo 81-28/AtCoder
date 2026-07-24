@@ -31,8 +31,7 @@ signed main(){
     int k;
     string s,t;
     cin >> k >> s >> t;
-    vi cnt(10,k);
-    vi cnta(10,0),cntb=cnta;
+    vi cnt(10,k),cnta(10,0),cntb(10,0);
     rep(i,4) {
         --cnt[s[i]-'0'];
         ++cnta[s[i]-'0'];
@@ -46,14 +45,13 @@ signed main(){
         ++cnta[i];
         rep1(j,9) {
             if (cnt[j]<1) continue;
-            int bb=cnt[j]--;
+            add*=cnt[j]--;
             ++cntb[j];
             int a=0,b=0;
             rep1(k,9) {
                 a+=k*int_pow(10,cnta[k]);
                 b+=k*int_pow(10,cntb[k]);
             }
-            add*=bb;
             sm+=add;
             if (a>b) ans+=add;
             --cntb[j];
