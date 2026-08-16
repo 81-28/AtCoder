@@ -1,4 +1,4 @@
-// https://atcoder.jp/contests/abc471/tasks/abc471_f
+// https://atcoder.jp/contests/arc227/tasks/arc227_c
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -95,75 +95,40 @@ signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
     cout<<fixed<<setprecision(16);
 
-    int n,k;
-    cin >> n >> k;
-    v<string> s(n);
-    cin >> s;
-    // // {s[i].size(),s[i],i}
-    // v<tuple<int,string,int>> p;
-    // // {s[i]の実質的な数値,s[i],i}
-    // v<tuple<int,string,int>> r;
-    // rep(i,n) {
-    //     string t=s[i];
-    //     p.pb({t.size(),t,i});
-    // }
-    // sort(all(p));
-    // sort(all(s));
-    vi cnt(11,0);
-    // {長さ,文字列}
-    multiset<pair<int,string>> st;
-    rep(i,n) {
-        int l=s[i].size();
-        ++cnt[l];
-        st.insert({l,s[i]});
-    }
-    // {答えの長さ,先頭文字列}
-    v<pair<int,string>> p;
-    rep(i,n) {
-        int l=0,r=s[i].size();
-        rep(j,r) {
-            if (s[i][j]=='0') {
-                l=j+1;
-            } else break;
+    int n;
+    string s;
+    cin >> n >> s;
+    vvi idx(27);
+    rep(i,n) idx[s[i]-'a'].pb(i);
+    vvi dif(27);
+    vvi d(26);
+    rep(i,26) {
+        int l=idx[i].size();
+        rep(j,l) {
+            dif[i].pb((idx[i][(j+1)%l]-idx[i][j]+n)%n);
         }
-        --cnt[r];
-        int sm=r-l;
-        // print(sm);
-        if (sm==0) {
-            ++cnt[r];
-            continue;
+        d[i]=dif[i];
+        sort(all(dif[i]));
+        uniq(dif[i]);
+    }
+    sort(all(dif));
+    uniq(dif);
+    // 全ての文字が、同じである等間隔だったら、k=1とならない
+    if (dif.size()<3) {
+        int dist=dif[1][0];
+        print(n/dist);
+        if (dist==1) {
+            print(0);
+            print();
+        } else {
+            print(1);
+            print(s[0]);
         }
-        int rem=k-1;
-        for (int j=10; j>0; --j) {
-            sm+=min(rem,cnt[j])*j;
-            if (rem<=cnt[j]) break;
-            rem-=cnt[j];
-        }
-        p.pb({sm,s[i]});
-        ++cnt[r];
+        return 0;
     }
-    sort(rall(p));
-    // for (auto val:p) print(val);
-    // print();
-    auto[len,str]=*p.begin();
-    st.erase(st.find({str.size(),str}));
-    v<string> ss;
-    rep(i,k-1) {
-        auto it=st.end();
-        --it;
-        auto[l,t]=*it;
-        ss.pb(t);
-        st.erase(it);
-    }
-    sort(rall(ss));
-    bool b=1;
-    for (char c:str) {
-        if (b && c=='0') continue;
-        b=0;
-        cout<<c;
-    }
-    for (auto t:ss) cout<<t;
-    print();
+    // k
+    print(1);
+
 
 
     return 0;
