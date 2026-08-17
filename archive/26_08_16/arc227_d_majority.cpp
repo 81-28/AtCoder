@@ -25,8 +25,8 @@ signed main(){
         string s;
         cin >> s;
         rep(i,m)for(int j=i; j<m; ++j) {
-            int a=s[i]-'0';
-            int b=s[j]-'0';
+            int a=s[i]&1;
+            int b=s[j]&1;
             ok[i][j][a][b]=1;
         }
     }
@@ -36,8 +36,8 @@ signed main(){
         bool ans=1;
         rep(i,m) {
             for(int j=i; j<m; ++j) {
-                int a=s[i]-'0';
-                int b=s[j]-'0';
+                int a=s[i]&1;
+                int b=s[j]&1;
                 if (!ok[i][j][a][b]) {
                     ans=0;
                     break;
