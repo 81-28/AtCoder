@@ -60,7 +60,6 @@ Node make_node(char c) {
 
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-    cout<<fixed<<setprecision(16);
 
     // 実行時に一度だけ基数をランダムに初期化
     mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());

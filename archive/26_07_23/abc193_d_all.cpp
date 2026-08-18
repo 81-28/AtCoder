@@ -26,7 +26,6 @@ void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),
 
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-    cout<<fixed<<setprecision(16);
 
     int k;
     string s,t;

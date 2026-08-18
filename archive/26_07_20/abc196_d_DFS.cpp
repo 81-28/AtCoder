@@ -33,7 +33,6 @@ int dfs(int n,int a,int b) {
 
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-    cout<<fixed<<setprecision(16);
 
     int a,b;
     cin >> h >> w >> a >> b;

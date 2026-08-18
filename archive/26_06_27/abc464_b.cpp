@@ -14,7 +14,6 @@ istream &operator>>(istream &is,v<T> &v){for(T &in:v)is>>in;return is;}
 
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-    cout<<fixed<<setprecision(16);
 
     int h,w;
     cin >> h >> w;
