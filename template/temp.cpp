@@ -31,6 +31,8 @@ inline int ManhattanDist(const pii& a,const pii& b){return abs(a.first-b.first)+
 // using mint=modint;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
 #define rep1(i,n) for(int i=1;i<=(int)(n);++i)
+#define rrep(i,n) for(int i=(int)(n-1);i>=0;--i)
+#define rrep1(i,n) for(int i=(int)(n);i>0;--i)
 #define pb push_back
 #define all(v) v.begin(),v.end()
 #define rall(v) v.rbegin(),v.rend()
@@ -97,9 +99,16 @@ T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 // 区間のクエリが必要ならセグ木使う
 // 値の範囲が大きい→座標圧縮で解けないかを考える
 
+void solve() {
+}
+
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
     cout<<fixed<<setprecision(16);
+
+    int t;
+    cin >> t;
+    while (t--) solve();
 
     int n;
     cin >> n;
