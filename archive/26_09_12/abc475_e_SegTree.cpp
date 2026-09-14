@@ -7,8 +7,6 @@ using namespace atcoder;
 
 template<typename T>
 using v=vector<T>;
-using vb=v<bool>;
-using vvb=v<vb>;
 using pii=pair<int,int>;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
 #define pb push_back
@@ -42,38 +40,43 @@ signed main(){
         --x,--y;
     }
 
+    // 計算量 (v<string>) < (vvi) < (vvb)
+
     // 正誤状態
-    vvb b(n,vb(k));
-    rep(i,n)rep(j,k) b[i][j]=(s[i][j]==t[j]);
-    // 正誤の種類
-    vvb bs=b,bb=b;
+    v<string> b(n,string(k,'0'));
+    rep(i,n)rep(j,k) b[i][j]+=(s[i][j]==t[j]);
+    // ありえる正誤の種類を全列挙
+    v<string> bs=b,bb=b;
     for (auto[x,y]:p) {
-        bb[x][y]=!bb[x][y];
+        bb[x][y]^=1;
         bs.pb(bb[x]);
     }
+    // 辞書順にして座標圧縮
     sort(all(bs)),uniq(bs);
     int l=bs.size();
     // その正誤の個数
     v<S> init(l,0);
-    for (vb bn:b) {
+    for (string bn:b) {
         int idx=lower_bound(all(bs),bn)-bs.begin();
         ++init[idx];
     }
     segtree<S,op,e> seg(init);
 
     // 未確定者はそこまでの正誤が同じ
-    // 自分より先に確定している正誤は、辞書順で後に位置する
+    // 脱落は辞書順前から確定、通過は辞書順後ろから確定
+    // // 自分より先に確定している正誤は、辞書順で後に位置する
 
     for (auto[x,y]:p) {
         int idx=lower_bound(all(bs),b[x])-bs.begin();
         seg.set(idx,seg.get(idx)-1);
-        b[x][y]=!b[x][y];
+        b[x][y]^=1;
         idx=lower_bound(all(bs),b[x])-bs.begin();
         seg.set(idx,seg.get(idx)+1);
 
         int cnt=seg.prod(idx,l);
+        // 自分以降の正誤がm以下なら通過
         // m==nでも、全不正解なら通過できない
-        YesNo(b[x]!=vb(k,0) && cnt<=m);
+        YesNo(b[x]!=string(k,'0') && cnt<=m);
     }
 
     return 0;
