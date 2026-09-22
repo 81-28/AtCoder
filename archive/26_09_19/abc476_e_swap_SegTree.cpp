@@ -12,53 +12,45 @@ using vi=v<int>;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
 
 template<typename T>
-istream &operator>>(istream &is,v<T> &v){for(T &in:v)is>>in;return is;}
+ostream &operator<<(ostream &os,const v<T> &v){for(int i=0;i<(int)v.size();++i)os<<(i?" ":"")<<v[i];return os;}
+#define endl '\n' // flushしたい場合は無効化
+template<typename Head,typename... Tail>
+void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
 
 
-using S_max = int;
-S_max op_max(S_max a, S_max b){ return max(a,b); }
-S_max e_max(){ return -INF; }
-
-using S_min = int;
-S_min op_min(S_min a, S_min b){ return min(a,b); }
-S_min e_min(){ return INF; }
+struct S{
+    int mx,mi;
+    S(int x,int y) {mx=x,mi=y;}
+    S(int x) {mx=mi=x;}
+    S(){mx=-INF,mi=INF;}
+};
+S op(S a,S b){return S(max(a.mx,b.mx),min(a.mi,b.mi));}
+S e(){return S();}
 
 signed main(){
     ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
     int n,m;
     cin >> n >> m;
-    vi p(n);
-    cin >> p;
-
-    vi idx(n);
+    vi p(n),idx(n+1);
+    v<S> init(n);
     rep(i,n) {
-        --p[i];
+        cin >> p[i];
         idx[p[i]]=i;
+        init[i]=S(p[i]);
     }
-    segtree<S_max,op_max,e_max> t_max(p);
-    segtree<S_min,op_min,e_min> t_min(p);
+    segtree<S,op,e> t(init);
 
     while (m--) {
         int l,r;
         cin >> l >> r;
-        --l;
-        int mx=t_max.prod(l,r);
-        int mi=t_min.prod(l,r);
-        int i=idx[mx];
-        int j=idx[mi];
-        int tmp=p[i];
-        p[i]=p[j];
-        p[j]=tmp;
-        idx[p[i]]=i;
-        idx[p[j]]=j;
-        t_max.set(i,p[i]);
-        t_max.set(j,p[j]);
-        t_min.set(i,p[i]);
-        t_min.set(j,p[j]);
+        S res=t.prod(--l,r);
+        int i=idx[res.mx],j=idx[res.mi];
+        int tmp=p[i];p[i]=p[j],p[j]=tmp;
+        idx[p[i]]=i,idx[p[j]]=j;
+        t.set(i,S(p[i])),t.set(j,S(p[j]));
     }
-    for (int val:p) cout<<val+1<<' ';
-    cout<<'\n';
+    print(p);
 
     return 0;
 }
