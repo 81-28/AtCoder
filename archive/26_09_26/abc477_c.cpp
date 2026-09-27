@@ -37,8 +37,7 @@ signed main(){
     while (q--) {
         int l,r;
         cin >> l >> r;
-        --l;
-        auto it=lower_bound(all(a),l);
+        auto it=lower_bound(all(a),--l);
         YesNo(it!=a.end() && *it+m <= r);
     }
 

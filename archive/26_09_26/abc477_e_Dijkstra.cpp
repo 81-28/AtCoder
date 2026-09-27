@@ -5,7 +5,6 @@ using namespace std;
 
 using ll=long long;
 #define int ll
-constexpr int INF=numeric_limits<int>::max()/4;
 template<typename T>
 using v=vector<T>;
 using vi=v<int>;
@@ -56,9 +55,8 @@ signed main(){
             print(b[l]);
             continue;
         }
-        int ans=INF;
-        chmin(ans,sm[r]-sm[l]);
-        chmin(ans,sm[n]-(sm[r]-sm[l]));
+        int ans=sm[r]-sm[l];
+        chmin(ans,sm[n]-ans);
         chmin(ans,b[l]+b[r]);
         print(ans);
     }

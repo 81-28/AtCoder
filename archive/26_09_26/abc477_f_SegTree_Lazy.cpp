@@ -54,16 +54,15 @@ signed main(){
     }
     sort(all(t));
 
-    vi ans(q);
+    vi ans(q,0);
     int row=0;
     v<S> init(m,S(0));
     lazy_segtree<S,op,e,F,mapping,composition,id> seg(init);
     // 若い行から先に処理
     for (auto[ro,c,d,i,x]:t) {
         while (row<ro) {
-            auto[l,r]=p[row];
+            auto[l,r]=p[row++];
             seg.apply(l,r,1);
-            ++row;
         }
         ans[i]+=x*seg.prod(c,d).val;
     }

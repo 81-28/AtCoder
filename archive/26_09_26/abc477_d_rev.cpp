@@ -21,12 +21,9 @@ signed main(){
 
     int n,q;
     cin >> n >> q;
-    v<pii> p(q);
     string b(n,0);
-    vi last(n,0);
-    v<pii> col={{0,0}};
-    rep(i,q) {
-        auto&[m,x]=p[i];
+    v<pii> p(q);
+    for (auto&[m,x]:p) {
         cin >> m;
         if (m&1) {
             cin >> x;
@@ -35,7 +32,6 @@ signed main(){
             char c;
             cin >> c;
             x=c-'a';
-            col.pb({i+1,x});
         }
     }
     vb done(n,0);
@@ -49,18 +45,14 @@ signed main(){
         if (m&1) {
             b[x]^=1;
             if (done[x]) continue;
-            if (b[x]) {
-                s.erase(x);
-            } else {
-                s.insert(x);
-            }
+            if (b[x]) s.erase(x);
+            else s.insert(x);
         } else {
-            for (auto it=s.begin(); it!=s.end(); ++it) {
+            for (auto it=s.begin(); s.size(); it=s.erase(it)) {
                 int j=*it;
-                ans[j]='a'+x;
+                ans[j]+=x;
                 done[j]=1;
             }
-            s.clear();
         }
     }
     print(ans);
