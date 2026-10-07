@@ -7,7 +7,6 @@ template<typename T>
 using v=vector<T>;
 using vi=v<int>;
 using vvi=v<vi>;
-#define rep(i,n) for(int i=0;i<(int)(n);++i)
 template<typename T>inline bool chmax(T& a,const T& b){if(a<b){a=b;return 1;}return 0;}
 
 template<typename T>
@@ -20,7 +19,7 @@ void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),
 vvi t;
 int score(vi& a) {
     int res=0;
-    for (vi s:t) {
+    for (vi& s:t) {
         if (a[s[1]]-a[s[0]]==s[2]) res+=s[3];    
     }
     return res;
@@ -45,9 +44,9 @@ signed main(){
     int q;
     cin >> n >> m >> q;
     t=vvi(q,vi(4));
-    rep(i,q) {
-        cin >> t[i];
-        --t[i][0],--t[i][1];
+    cin >> t;
+    for (vi& s:t) {
+        --s[0],--s[1];
     }
     vi a(n);
     print(dfs(a,0));
