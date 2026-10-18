@@ -38,7 +38,7 @@ signed main(){
     // sm[i]:状態iのケーキの大きさ合計
     vi sm(mx,0);
     // 昇順に拾うDPをするので、実行順はok
-    rep1(i,mx) {
+    rep1(i,mx-1) {
         rep(j,n) {
             if (!((i>>j)&1)) continue;
             int pre=i^(1<<j);
