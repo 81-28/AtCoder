@@ -6,14 +6,9 @@ using namespace std;
 template<typename T>
 using v=vector<T>;
 using vi=v<int>;
-using pii=pair<int,int>;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
 #define pb push_back
 #define all(v) v.begin(),v.end()
-template<typename T>inline bool chmax(T& a,const T& b){if(a<b){a=b;return 1;}return 0;}
-
-#define f first
-#define s second
 
 template<typename T>
 istream &operator>>(istream &is,v<T> &v){for(T &in:v)is>>in;return is;}
@@ -29,23 +24,12 @@ signed main(){
     cin >> n >> k >> t;
     vi a(n);
     cin >> a;
+    a.pb(-k),a.pb(t);
     sort(all(a));
-    v<pii> p(1,{0,0});
-    rep(i,n) {
-        if (p.back().s >= a[i]) {
-            chmax(p.back().s,a[i]+k);
-            continue;
-        }
-        p.pb({a[i],a[i]+k});
-    }
-    p.pb({t,t});
-    sort(all(p));
-    int m=p.size();
     int ans=0;
-    rep(i,m-1) {
-        if (p[i].s>=t) break;
-        int d=p[i+1].f-p[i].s;
-        ans+=(d+k-1)/k;
+    rep(i,n+1) {
+        ans+=max(0,a[i+1]-a[i]-1)/k;
+        if (a[i+1]>=t) break;
     }
     print(ans);
 
