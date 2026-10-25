@@ -31,21 +31,18 @@ signed main(){
         g[--a].pb(--b);
     }
     vi d(n,n);
+    // {距離,位置}
     priority_queue<pii,v<pii>,greater<>> q;
-    d[s]=0;
-    q.push({d[s],s});
+    q.push({d[s]=0,s});
     while (!q.empty()) {
         auto[dist,pos]=q.top();
         q.pop();
         if (d[pos]<dist) continue;
         int l=g[pos].size();
-        if (!l) continue;
         sort(all(g[pos]));
-        int nxt=g[pos][0];
-        if (chmin(d[nxt],dist)) q.push({d[nxt],nxt});
-        for (int i=1; i<l; ++i) {
-            nxt=g[pos][i];
-            if (chmin(d[nxt],dist+1)) q.push({d[nxt],nxt});
+        rep(i,l) {
+            int nxt=g[pos][i];
+            if (chmin(d[nxt],dist+(i>0))) q.push({d[nxt],nxt});
         }
     }
     print(d[t]==n?-1:d[t]);

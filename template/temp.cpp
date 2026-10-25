@@ -16,7 +16,7 @@ using ll=long long;
 using ull=unsigned long long;
 using ld=long double;
 constexpr int INF=numeric_limits<int>::max()/4;
-const ld PI=acos(-1);
+const ld PI=acosl(-1);
 template<typename T>
 using v=vector<T>;
 using vi=v<int>;
@@ -92,7 +92,11 @@ void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),
 #define YesNo(x) print(x?"Yes":"No")
 
 template<typename T>
-auto sum(const v<T>& v){return accumulate(v.begin(),v.end(),T{});}
+T sum(const v<T>& v){return accumulate(v.begin(),v.end(),T{});}
+template<typename T>
+T prod(const v<T>& v){return accumulate(v.begin(),v.end(),T{1},multiplies{});}
+template<typename T>
+T xor_sum(const v<T>& v){return accumulate(v.begin(),v.end(),T{},bit_xor{});}
 template<typename T>
 T max(const v<T>& v){return *max_element(v.begin(),v.end());}
 template<typename T>
@@ -137,12 +141,12 @@ signed main(){
     // print(b); X
     rep(i,n)print(b[i]);
 
-    tuple<int,string,double> t;
-    // cin >> get<0>(t) >> get<1>(t) >> get<2>(t);
-    cin >> t;
-    // print(get<0>(t),get<1>(t),get<2>(t));
-    print(t);
-    // auto&[x,y,z]=t;
+    tuple<int,string,double> tu;
+    // cin >> get<0>(tu) >> get<1>(tu) >> get<2>(tu);
+    cin >> tu;
+    // print(get<0>(tu),get<1>(tu),get<2>(tu));
+    print(tu);
+    // auto&[x,y,z]=tu;
     // cin >> x >> y >> z;
     // print(x,y,z);
 
