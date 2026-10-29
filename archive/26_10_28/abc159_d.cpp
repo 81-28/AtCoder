@@ -9,8 +9,6 @@ template<typename T>
 using v=vector<T>;
 using vi=v<int>;
 
-template<typename T>
-istream &operator>>(istream &is,v<T> &v){for(T &in:v)is>>in;return is;}
 #define endl '\n' // flushしたい場合は無効化
 template<typename Head,typename... Tail>
 void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
@@ -21,12 +19,13 @@ signed main(){
 
     int n;
     cin >> n;
-    vi a(n);
-    cin >> a;
-    unordered_map<int,int> m;
+    vi a(n),c(n,0);
     int sm=0;
-    for(int b:a) sm+=m[b]++;
-    for(int b:a) print(sm-m[b]+1);
+    for(int&b:a) {
+        cin >> b;
+        sm+=c[--b]++;
+    }
+    for(int b:a) print(sm-c[b]+1);
 
     return 0;
 }
