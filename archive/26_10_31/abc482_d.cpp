@@ -24,14 +24,13 @@ signed main(){
     vi x(n);
     cin >> x;
     rep(i,n) {
-        int res=(x[n-1]-x[0])/2;
-        if (i==0||i==n-1) {
-            print(res);
-            continue;
-        }
-        chmin(res,max((x[n-1]-x[i])/2,(x[i+1]-x[0])/2));
-        chmin(res,max((x[n-1]-x[i-1])/2,(x[i]-x[0])/2));
-        print(res);
+        int res=x[n-1]-x[0];
+        // 停止しても得しない
+        // 左に触れて折り返す
+        if (i) chmin(res,max(x[n-1]-x[i-1],x[i]-x[0]));
+        // 右に触れて折り返す
+        if (i+1<n) chmin(res,max(x[n-1]-x[i],x[i+1]-x[0]));
+        print(res/2);
     }
 
     return 0;
