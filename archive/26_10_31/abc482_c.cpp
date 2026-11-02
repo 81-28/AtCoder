@@ -6,7 +6,8 @@ using namespace std;
 template<typename T>
 using v=vector<T>;
 using vi=v<int>;
-#define pb push_back
+using vvi=v<vi>;
+#define rep(i,n) for(int i=0;i<(int)(n);++i)
 #define all(v) v.begin(),v.end()
 
 #define endl '\n' // flushしたい場合は無効化
@@ -19,25 +20,15 @@ signed main(){
 
     int h,w,n,q;
     cin >> h >> w >> n >> q;
-    vi r,c;
-    while (n--) {
-        int x,y;
-        cin >> x >> y;
-        r.pb(x),c.pb(y);
-    }
-    sort(all(r)),sort(all(c));
+    vvi p(2,vi(n));
+    rep(i,n) cin >> p[1][i] >> p[0][i];
+    rep(i,2) sort(all(p[i]));
     while (q--) {
         int m,x,y;
         cin >> m >> x >> y;
-        if (m&1) {
-            auto itl=lower_bound(all(r),x);
-            auto itr=upper_bound(all(r),y);
-            print(itr-itl);
-        } else {
-            auto itl=lower_bound(all(c),x);
-            auto itr=upper_bound(all(c),y);
-            print(itr-itl);
-        }
+        auto itl=lower_bound(all(p[m&1]),x);
+        auto itr=upper_bound(all(p[m&1]),y);
+        print(itr-itl);
     }
 
     return 0;
