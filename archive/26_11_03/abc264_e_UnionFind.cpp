@@ -1,0 +1,91 @@
+// https://atcoder.jp/contests/abc264/tasks/abc264_e
+
+#include<bits/stdc++.h>
+using namespace std;
+
+template<typename T>
+using v=vector<T>;
+using vi=v<int>;
+using vb=v<bool>;
+using pii=pair<int,int>;
+#define rep(i,n) for(int i=0;i<(int)(n);++i)
+
+#define f first
+#define s second
+
+template<typename T>
+ostream &operator<<(ostream &os,const v<T> &v){for(int i=0;i<(int)v.size();++i)os<<(i?" ":"")<<v[i];return os;}
+template<typename Head,typename... Tail>
+void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),...);cout<<endl;}
+
+
+class UnionFind {
+public:
+    // par: 親, siz: サイズ
+    vector<int> par,siz;
+    // n頂点のUnion-Find
+    UnionFind(const int& n) {
+        par = vector<int>(n,-1);
+        siz = vector<int>(n,1);
+    }
+
+    // 頂点xの根を返す関数
+    int root(const int& x) {
+        if (par[x] == -1) return x; // 親が無いとき、それが根
+        else return par[x] = root(par[x]); // 経路圧縮して親に移動
+    }
+
+    // 頂点uとvを繋げる関数(sizが大きい方に根を統合)
+    // 返り値はsameと同じ
+    bool unite(const int& u, const int& v) {
+        int rootU = root(u);
+        int rootV = root(v);
+        if (rootU == rootV) return 1;
+        if (siz[rootU] < siz[rootV]) {
+            par[rootU] = rootV;
+            siz[rootV] += siz[rootU];
+        } else {
+            par[rootV] = rootU;
+            siz[rootU] += siz[rootV];
+        }
+        return 0;
+    }
+
+    // 頂点xが含まれる連結成分の大きさ
+    int size(const int& x) {
+        return siz[root(x)];
+    }
+};
+
+signed main(){
+    ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+
+    int n,m,e;
+    cin >> n >> m >> e;
+    UnionFind uf(n+m);
+    rep(i,m-1) uf.unite(n+i,n+i+1);
+    v<pii> p(e);
+    for (auto&[u,v]:p) {
+        cin >> u >> v;
+        --u,--v;
+    }
+    int q;
+    cin >> q;
+    vi x(q);
+    vb b(e,1);
+    rep(i,q) {
+        cin >> x[i];
+        b[--x[i]]=0;
+    }
+    rep(i,e) {
+        if (b[i]) uf.unite(p[i].f,p[i].s);
+    }
+    vi ans(q);
+    for (int i=q-1; i>=0; --i) {
+        ans[i]=uf.size(n)-m;
+        uf.unite(p[x[i]].f,p[x[i]].s);
+    }
+    print(ans);
+
+    return 0;
+}
