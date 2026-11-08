@@ -105,6 +105,10 @@ T min(const v<T>& v){return *min_element(v.begin(),v.end());}
 // 区間のクエリが必要ならセグ木使う
 // 値の範囲が大きい→座標圧縮で解けないかを考える
 
+// 大量に要素を追加する場合、reserve(n)で、再確保・再ハッシュを減らして高速化
+// vector/string/unordered_map/unordered_setで使用可能（map/setは不可）
+// nは追加後の想定要素数。過剰確保に注意。size()は変わらない
+
 void solve() {
 }
 

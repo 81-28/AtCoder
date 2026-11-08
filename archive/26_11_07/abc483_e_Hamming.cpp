@@ -5,8 +5,6 @@ using namespace std;
 
 using ll=long long;
 #define int ll
-template<typename T>
-using v=vector<T>;
 #define rep(i,n) for(int i=0;i<(int)(n);++i)
 
 #define endl '\n' // flushしたい場合は無効化
@@ -20,7 +18,8 @@ signed main(){
     int n,m;
     cin >> n >> m;
     // 文字列に対するカウント
-    v<unordered_map<string,int>> cnt(3);
+    unordered_map<string,int> cnt;
+    cnt.reserve(n*(1+m+m*(m-1)/2));
     int ans=0;
     while (n--) {
         string s;
@@ -28,14 +27,14 @@ signed main(){
         string t=s;
 
         // 完全一致
-        int res=cnt[0][t]++;
+        int res=cnt[t]++;
         ans+=res*(m-1)*(m-2)/2;
 
         // 1字違い
         res=0;
         rep(i,m) {
             t[i]='.';
-            res+=cnt[1][t]++;
+            res+=cnt[t]++;
             t[i]=s[i];
         }
         ans-=res*(m-2);
@@ -46,7 +45,7 @@ signed main(){
             t[i]='.';
             for(int j=i+1; j<m; ++j) {
                 t[j]='.';
-                res+=cnt[2][t]++;
+                res+=cnt[t]++;
                 t[j]=s[j];
             }
             t[i]=s[i];
