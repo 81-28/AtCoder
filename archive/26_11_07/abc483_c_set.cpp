@@ -20,7 +20,7 @@ signed main(){
     cin >> n >> m;
     // {番号,票数}
     map<int,int> cnt;
-    // g[i][j]:1希望がiで1希望がjの票数
+    // g[i][j]:1希望がiで2希望がjの票数
     v<unordered_map<int,int>> g(n);
     // {-票数,番号}
     set<pii> s;
