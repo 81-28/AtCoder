@@ -1,5 +1,6 @@
 // 
 
+// ライブラリのテンプレート
 // https://github.com/81-28/AtCoder
 
 // Ctrl + Shift + B                => Build
