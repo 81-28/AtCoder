@@ -134,6 +134,7 @@ signed main(){
     cin >> a;
     print(a);
     vvi g(n,vi(n,0));
+    // v g(n,v(n,0));
     cin >> g;
     rep(i,n)print(g[i]);
 
