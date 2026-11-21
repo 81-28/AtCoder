@@ -23,11 +23,11 @@ void print(const Head &head,const Tail &... tail){cout<<head;((cout<<' '<<tail),
 struct S{
     bool ok;
     int num;
-    S(bool b,int x) {
+    S(const bool& b,const int& x) {
         ok=b;
         num=x;
     }
-    S(int x) {
+    S(const int& x) {
         ok=1;
         num=x;
     }
@@ -36,7 +36,7 @@ struct S{
         num=-1;
     }
 };
-S op(S a,S b){
+S op(const S& a,const S& b){
     if (!a.ok || b.num==-1) return a;
     if (!b.ok || a.num==-1) return b;
     if (a.num==b.num) return a;
