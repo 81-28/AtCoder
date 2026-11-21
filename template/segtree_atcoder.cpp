@@ -17,19 +17,19 @@ constexpr int INF = std::numeric_limits<int>::max()/4; // 約2e18
 using S=int;
 // struct S{
 //     int mx,mi;
-//     S(int x,int y) {mx=x,mi=y;}
-//     S(int x) {mx=mi=x;}
+//     S(const int& x,const int& y) {mx=x,mi=y;}
+//     S(const int& x) {mx=mi=x;}
 //     S(){mx=-INF,mi=INF;}
 // };
-S op(S a,S b){return S(a+b);}
-// S op(S a,S b){return S(max(a.mx,b.mx),min(a.mi,b.mi));}
+S op(const S& a,const S& b){return S(a+b);}
+// S op(const S& a,const S& b){return S(max(a.mx,b.mx),min(a.mi,b.mi));}
 S e(){return S();}
 
 using F=int;
 constexpr F ID=numeric_limits<F>::max()/4;
 // constexpr F ID=-1;
-S mapping(F f,S x){return (f==ID)?x:(f+x);}
-F composition(F f,F g){return f==ID?g:f;}
+S mapping(const F& f,const S& x){return (f==ID)?x:(f+x);}
+F composition(const F& f,const F& g){return f==ID?g:f;}
 F id(){return ID;}
 
 
