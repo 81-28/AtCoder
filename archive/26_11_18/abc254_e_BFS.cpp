@@ -1,4 +1,4 @@
-// https://atcoder.jp/contests/adt_all_20260812_2/tasks/abc254_e
+// https://atcoder.jp/contests/abc254/tasks/abc254_e
 
 #include<bits/stdc++.h>
 using namespace std;
